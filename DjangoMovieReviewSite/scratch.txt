@@ -1,0 +1,37 @@
+2/16/20
+
+Making progress!
+The basic framwork parts are done.  I have figured out how to have a page that lists
+all of the movies in the database and link them to an individual movie.  This didn't
+take as long as I thought it would.
+Next I need to...
+Work on the model to display the scores.... 
+Also finish creating the review table
+
+2/19/20
+Added movie title to all reviews per movie page
+displaying correct records
+custom message if no records exist.
+
+2/22/20
+Related as fuck!
+Need to add:
+
+Search,
+Users,
+Add reviews,
+Admin Page (after users)
+
+3/1/2020
+I really haven't been keeping up with this...
+Users and User Groups are done! Right now you can create a default user and there is one
+"staff" member, me!
+We can also create movie reviews!  The movie_id and user_id are passed in, so we associate those
+together.  We will be able to view all reviews by a specific user and such.
+Next is to create the page that you get redirected to after creating a review.
+We are ALMOST to the point where I can actually start styling this thing.
+
+3/2/2020
+Auto summing total works, redirect to review after review is done works, just add data to that
+page.  Also, navigating from the page that shows all reviews for a movie to the singular review
+works

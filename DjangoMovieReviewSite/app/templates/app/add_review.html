@@ -1,0 +1,12 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<h2>{{movie_info.movie_title}}, {{movie_info.movie_release_year}}</h2>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ form.movie.as_hidden }}
+    <button type="submit">Submit</button>
+    </form>
+    
+{% endblock %}

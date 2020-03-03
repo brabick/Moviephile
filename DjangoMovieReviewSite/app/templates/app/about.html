@@ -1,8 +1,18 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
+{{titles.movie_title}}
+    {% for movie_a in movies %}
+    
+    <a href="{% url 'movie' movie_id=movie_a.movie_id %}">
+    {{movie_a.movie.movie_title}}
+    {{movie_a.movie_id}},
+    {{movie_a.review}}
+    {{movie_a.user.username}}
+    </a>
+    <br />
+    {% endfor %}
 
-<h2>{{ title }}.</h2>
 <h3>{{ message }}</h3>
 
 <p>Use this area to provide additional information.</p>

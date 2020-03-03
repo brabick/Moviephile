@@ -31,6 +31,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="app\admin.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
     <Compile Include="app\tests.py" />
@@ -53,9 +56,29 @@
     <Folder Include="app\static\app\scripts\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
+    <Folder Include="app\templates\registration\" />
     <Folder Include="DjangoMovieReviewSite\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\add_review.html" />
+    <Content Include="app\templates\app\createReview.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="app\templates\app\movie.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="app\templates\app\search_results.html" />
+    <Content Include="app\templates\app\view_review.html" />
+    <Content Include="app\templates\registration\login.html" />
+    <Content Include="app\templates\registration\password_reset_complete.html" />
+    <Content Include="app\templates\registration\password_reset_confirm.html" />
+    <Content Include="app\templates\registration\password_reset_done.html" />
+    <Content Include="app\templates\registration\password_reset_email.html" />
+    <Content Include="app\templates\registration\password_reset_form.html" />
+    <Content Include="app\templates\signup.html" />
+    <Content Include="DjangoMovieReviewSite\my.cnf">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

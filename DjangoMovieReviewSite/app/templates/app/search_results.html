@@ -1,0 +1,18 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+    {% for movie_a in movie_info %}
+    
+        <a href="{% url 'add_review' movie_id=movie_a.movie_id %}">
+        {{movie_a.movie_title}},
+        {{movie_a.movie_release_year}},
+        {{movie_a.movie_genre}}
+        </a>
+    <br />
+    {% endfor %}
+
+<h3>{{ message }}</h3>
+
+<p>Use this area to provide additional information.</p>
+
+{% endblock %}
