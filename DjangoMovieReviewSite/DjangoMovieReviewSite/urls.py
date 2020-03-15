@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^$', app.views.home, name='home'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about$', app.views.about, name='about'),
-    path('movie/<int:id>/<int:is_movie>', app.views.movie, name='movie'),
+    path('movie/<int:id>/<int:is_movie>/<int:is_recent>', app.views.movie, name='movie'),
     url(r'^signup/$', app.views.signup, name='signup'),   
     url(r'^login/$',
         django.contrib.auth.views.LoginView.as_view(),
@@ -52,7 +52,7 @@ urlpatterns = [
 urlpatterns = urlpatterns + [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    url(r'^search_results/$', app.views.search_results, name='search_results'),
+    path('search_results/<int:is_review>', app.views.search_results, name='search_results'),
     url(r'^add_review/(?P<movie_id>\w+)/$', app.views.add_review, name='add_review'),
     url(r'^view_review/(?P<movie_score_id>\w+)/$', app.views.view_review, name='view_review'),
 ]

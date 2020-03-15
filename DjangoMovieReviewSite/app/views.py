@@ -72,9 +72,12 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-def movie(request, id, is_movie):
+def movie(request, id, is_movie, is_recent):
     assert isinstance(request, HttpRequest)
-    if is_movie == 1:
+    if is_recent==1:
+        movie = tbl_movie_scores.objects.all()[:10]
+        header = "Recent Movie Reviews"
+    elif is_movie == 1:
         movie = tbl_movie_scores.objects.filter(movie_id=id)
         movie_title = tbl_movies.objects.get(movie_id=id)
         title = movie_title.movie_title
@@ -83,19 +86,22 @@ def movie(request, id, is_movie):
         movie = tbl_movie_scores.objects.filter(user=id)
         user = User.objects.get(id=id)
         header = "All Reviews by " + user.username
+    
     return render(
         request,
         'app/movie.html',
         {
             'header':header,
-            'movie_info':movie,
-            'null_message': 'There are no reviews for this movie, add one today!',
+            'movies':movie,
+            'message':'Above are the ten most recent reviews! Click on a title to \
+            see what made that movie so great.',
             'year':datetime.now().year,
         }
     )
 
 
-def search_results(request):
+
+def search_results(request, is_review):
    assert isinstance(request, HttpRequest)
    query = request.GET.get('search_string')
    results = tbl_movies.objects.filter(movie_title__icontains=query)

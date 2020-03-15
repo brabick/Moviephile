@@ -7,9 +7,31 @@
     <p class="lead">A place for uninformed, unwanted and uninitiated movie reviews!</p>
 </div>
 
-<form action="{% url 'search_results' %}" method="get">
-  <input name="search_string" type="text" placeholder="Search...">
-    <button type="submit">Submit</button>
-</form>
+<table>
+    <tr>
+        <td>
+            Use this field to find a movie to review
+        </td>
+        <td> | </td>
+        <td>Use this field to find reviews of a movie</td>
+         </tr>
+    <tr>
+    <td>
+        <form action="{% url 'search_results' is_review=0 %}" method="get">
+        <input name="search_string" type="text" placeholder="Find a movie to review">
+        <button type="submit">Submit</button>
+        </form>
+    </td>
+        <td>
+             | 
+        </td>
+    <td>
+        <form action="{% url 'search_results' is_review=1 %}" method="get">
+        <input name="search_string" type="text" placeholder="Find a review">
+        <button type="submit">Submit</button>
+        </form>
+    </td>
+       </tr>
+</table>
 
 {% endblock %}
