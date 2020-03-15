@@ -1,19 +1,16 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-    <h2>All Reviews For {{title.movie_title}}</h2>
+    <h2>{{header}}</h2>
     {% if not  movie_info %}
        {{null_message}}
     {% else %}
     <p>
-        {% for title in movie_titles %}
-            {{title.movie_title}}
-        {% endfor %}
         {% for movie in movie_info %}
             <a href="{% url 'view_review' movie_score_id=movie.movie_score_id %}">
-            {{movie.movie_id}}
-            {{movie.user.username}}
-            {{movie.total}}
+                {{movie.movie_id}}
+                {{movie.user.username}}
+                {{movie.total}}
             <br />
             </a>
         {% endfor %}

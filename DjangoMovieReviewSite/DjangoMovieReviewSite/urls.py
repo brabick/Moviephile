@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^$', app.views.home, name='home'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about$', app.views.about, name='about'),
-    url(r'^movie/(?P<movie_id>\w+)/$', app.views.movie, name='movie'),
+    path('movie/<int:id>/<int:is_movie>', app.views.movie, name='movie'),
     url(r'^signup/$', app.views.signup, name='signup'),   
     url(r'^login/$',
         django.contrib.auth.views.LoginView.as_view(),

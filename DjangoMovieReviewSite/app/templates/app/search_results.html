@@ -1,16 +1,24 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Release Year</th>
+        <th>Genre</th>
+    </tr>
     {% for movie_a in movie_info %}
+        <tr>
+            <td><a href="{% url 'add_review' movie_id=movie_a.movie_id %}">
+            {{movie_a.movie_title}}
+            </a></td>
+            <td>{{movie_a.movie_release_year}}</td>
+            <td>{{movie_a.movie_genre}}</td>
+            
+        </tr>
     
-        <a href="{% url 'add_review' movie_id=movie_a.movie_id %}">
-        {{movie_a.movie_title}},
-        {{movie_a.movie_release_year}},
-        {{movie_a.movie_genre}}
-        </a>
-    <br />
     {% endfor %}
-
+</table>
 <h3>{{ message }}</h3>
 
 <p>Use this area to provide additional information.</p>

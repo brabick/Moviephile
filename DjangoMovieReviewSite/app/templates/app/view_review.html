@@ -1,5 +1,58 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
+<h1>Review for {{review_info.movie.movie_title}} by {{review_info.user.username}}</h1>
+<table>
+    <tr>
+        <th>Music</th>
+        <td>{{review_info.score}}</td>
+        <th>Review: </th>
+        <td></td>
+        <td>{{review_info.review}}</td>
+    </tr>
+    <tr>
+        <th>Cinematography</th>
+        <td>{{review_info.cinematography}}</td>
+    </tr>
+    <tr>
+        <th>Story Telling</th>
+        <td>{{review_info.story_telling}}</td>
+    </tr>
+    <tr>
+        <th>Acting</th>
+        <td>{{review_info.acting}}</td>
+    </tr>
+    <tr>
+        <th>Plausibility</th>
+        <td>{{review_info.plausibility}}</td>
+    </tr>
+    <tr>
+        <th>Cast</th>
+        <td>{{review_info.cast}}</td>
+    </tr>
+    <tr>
+        <th>Effects</th>
+        <td>{{review_info.effects}}</td>
+    </tr>
+    <tr>
+        <th>Fun Factor</th>
+        <td>{{review_info.fun_factor}}</td>
+    </tr>
+    <tr>
+        <th>Originality</th>
+        <td>{{review_info.originality}}</td>
+    </tr>
+    <tr>
+        <th>Characters</th>
+        <td>{{review_info.characters}}</td>
+    </tr>
+    <tr>
+        <th>Total</th>
+        <td>{{review_info.total}}</td>
+    </tr>
+    
+        
+    
+</table>
 
 {% endblock %}

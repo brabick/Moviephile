@@ -28,5 +28,7 @@ class tbl_movie_scores(models.Model):
     total = models.IntegerField(blank=True, null=True)
     review = models.CharField(max_length=4000, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
 

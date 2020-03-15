@@ -12,6 +12,7 @@ from django.contrib.auth.forms import UserCreationForm
 from app.forms import SignUpForm, tbl_movie_scores_form
 from django.contrib.auth import login, authenticate
 from django.db.models import Sum
+from django.contrib.auth.models import User
 
 
 def home(request):
@@ -44,15 +45,15 @@ def contact(request):
 def about(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
-    movie = tbl_movie_scores.objects.all()
-    #movie = tbl_movie_scores.objects.values_list().distinct()
-
+    order_by = request.GET.get('order_by', 'created_at')
+    movie = tbl_movie_scores.objects.all().order_by(order_by)[:10]
     return render(
         request,
         'app/about.html',
         {
             'movies':movie,
-            'message':'Your application description.',
+            'message':'Above are the ten most recent reviews! Click on a title to \
+            see what made that movie so great.',
             'year':datetime.now().year,
         }
     )
@@ -71,18 +72,25 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-def movie(request, movie_id):
+def movie(request, id, is_movie):
     assert isinstance(request, HttpRequest)
-    movie = tbl_movie_scores.objects.filter(movie_id=movie_id)
-    movie_title = tbl_movies.objects.get(pk=movie_id)
+    if is_movie == 1:
+        movie = tbl_movie_scores.objects.filter(movie_id=id)
+        movie_title = tbl_movies.objects.get(movie_id=id)
+        title = movie_title.movie_title
+        header = "All Reviews of " + title
+    elif is_movie==0:
+        movie = tbl_movie_scores.objects.filter(user=id)
+        user = User.objects.get(id=id)
+        header = "All Reviews by " + user.username
     return render(
         request,
         'app/movie.html',
         {
-        'movie_info':movie,
-        'title':movie_title,
-        'null_message': 'There are no reviews for this movie, add one today!',
-        'year':datetime.now().year,
+            'header':header,
+            'movie_info':movie,
+            'null_message': 'There are no reviews for this movie, add one today!',
+            'year':datetime.now().year,
         }
     )
 
@@ -107,7 +115,7 @@ def add_review(request, movie_id):
     movie = tbl_movies.objects.get(pk=movie_id)
     user = request.user
     if request.method=='POST':
-        form = tbl_movie_scores_form(request.POST, {'user' : user.id, 'movie':movie_id})
+        form = tbl_movie_scores_form(request.POST, {'user' : user.id, 'movie':movie_id, 'created_at':datetime.now(), 'updated_at':None})
         if form.is_valid():
             review = form.save()
             review.total = (review.score + review.acting + review.cinematography + review.story_telling +
@@ -116,7 +124,7 @@ def add_review(request, movie_id):
             review.save()
             return redirect('view_review', movie_score_id=review.movie_score_id)
     else:
-        form = tbl_movie_scores_form({'user' : user.id, 'movie':movie_id})
+        form = tbl_movie_scores_form({'user' : user.id, 'movie':movie_id, 'created_at':datetime.now(), 'updated_at':None})
         return render(
             request,
             'app/add_review.html',
