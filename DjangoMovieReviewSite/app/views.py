@@ -115,16 +115,30 @@ def add_review(request, movie_id):
     movie = tbl_movies.objects.get(pk=movie_id)
     user = request.user
     if request.method=='POST':
-        form = tbl_movie_scores_form(request.POST, {'user' : user.id, 'movie':movie_id, 'created_at':datetime.now(), 'updated_at':None})
+        form = tbl_movie_scores_form(request.POST)
         if form.is_valid():
             review = form.save()
             review.total = (review.score + review.acting + review.cinematography + review.story_telling +
             review.plausibility + review.cast + review.effects + review.fun_factor + review.originality +
             review.characters)
+            review.user_id = user.id
+            review.movie_id = movie_id
             review.save()
+
             return redirect('view_review', movie_score_id=review.movie_score_id)
+        else:
+            
+            return render(
+            request,
+            'app/add_review.html',
+            {
+            'form':form,
+            'movie_info': movie,
+            }
+        )
+
     else:
-        form = tbl_movie_scores_form({'user' : user.id, 'movie':movie_id, 'created_at':datetime.now(), 'updated_at':None})
+        form = tbl_movie_scores_form()
         return render(
             request,
             'app/add_review.html',
