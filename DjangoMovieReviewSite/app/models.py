@@ -15,16 +15,36 @@ class tbl_movies(models.Model):
 class tbl_movie_scores(models.Model):
     movie = models.ForeignKey(tbl_movies, on_delete=models.CASCADE)
     movie_score_id = models.AutoField(primary_key=True)
-    score = models.IntegerField()
-    cinematography = models.IntegerField()
-    story_telling = models.IntegerField()
-    acting = models.IntegerField()
-    plausibility = models.IntegerField()
-    cast = models.IntegerField()
-    effects = models.IntegerField()
-    fun_factor = models.IntegerField()
-    originality = models.IntegerField()
-    characters = models.IntegerField()
+    score = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    cinematography = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    story_telling = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    acting = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    plausibility = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    cast = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    effects = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    fun_factor = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    originality = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
+    characters = models.IntegerField((validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)])
     total = models.IntegerField(blank=True, null=True)
     review = models.CharField(max_length=4000, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
