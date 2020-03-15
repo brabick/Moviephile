@@ -4,6 +4,7 @@ Definition of models.
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class tbl_movies(models.Model):
@@ -15,34 +16,34 @@ class tbl_movies(models.Model):
 class tbl_movie_scores(models.Model):
     movie = models.ForeignKey(tbl_movies, on_delete=models.CASCADE)
     movie_score_id = models.AutoField(primary_key=True)
-    score = models.IntegerField((validators=[
+    score = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    cinematography = models.IntegerField((validators=[
+    cinematography = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    story_telling = models.IntegerField((validators=[
+    story_telling = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    acting = models.IntegerField((validators=[
+    acting = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    plausibility = models.IntegerField((validators=[
+    plausibility = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    cast = models.IntegerField((validators=[
+    cast = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    effects = models.IntegerField((validators=[
+    effects = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    fun_factor = models.IntegerField((validators=[
+    fun_factor = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    originality = models.IntegerField((validators=[
+    originality = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
-    characters = models.IntegerField((validators=[
+    characters = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])
     total = models.IntegerField(blank=True, null=True)
