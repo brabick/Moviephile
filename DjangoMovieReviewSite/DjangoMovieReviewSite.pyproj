@@ -61,9 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\add_review.html" />
-    <Content Include="app\templates\app\createReview.html">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="app\templates\app\movie.html">
       <SubType>Code</SubType>
     </Content>

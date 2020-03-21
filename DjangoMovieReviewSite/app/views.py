@@ -72,32 +72,39 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-def movie(request, id, is_movie):
+def movie(request, id, is_movie, is_recent):
     assert isinstance(request, HttpRequest)
-    if is_movie == 1:
-        movie = tbl_movie_scores.objects.filter(movie_id=id)
-        movie_title = tbl_movies.objects.get(movie_id=id)
-        title = movie_title.movie_title
-        header = "All Reviews of " + title
+    if is_recent==1:
+        movie = tbl_movie_scores.objects.all()[:10]
+        header = "Recent Movie Reviews"
+        message = "Here are the 10 most recent movie reviews"
+    elif is_movie == 1:
+        query = request.GET.get('search_string')
+        movie = tbl_movie_scores.objects.filter(movie__movie_title__icontains=query)
+        header = "All Reviews with '" + query + "' in the title"
+        message = "noice"
     elif is_movie==0:
         movie = tbl_movie_scores.objects.filter(user=id)
         user = User.objects.get(id=id)
         header = "All Reviews by " + user.username
+        message = user.username + " has reviewed quite a few movies!"
+    
     return render(
         request,
         'app/movie.html',
         {
             'header':header,
-            'movie_info':movie,
-            'null_message': 'There are no reviews for this movie, add one today!',
+            'movies':movie,
+            'message': message,
             'year':datetime.now().year,
         }
     )
 
 
+
 def search_results(request):
    assert isinstance(request, HttpRequest)
-   query = request.GET.get('search_string')
+   query = request.GET.get('search_string') 
    results = tbl_movies.objects.filter(movie_title__icontains=query)
    return render(
        request, 

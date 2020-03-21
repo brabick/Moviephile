@@ -1,25 +1,11 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-<h1>Recent Movie Reviews</h1>
-<table>
-    <tr>
-        <th><a href="?order_by=movie">Title</a></th>
-        <th><a href="?order_by=total">Total</a></th>
-        <th><a href="?order_by=user">User</a></th>
-    </tr>
-    {% for movie_a in movies %}
-    <tr>
-    <td><a href="{% url 'movie' id=movie_a.movie_id is_movie=1 %}">
-    {{movie_a.movie.movie_title}}
-    </a></td>
-    <td>{{movie_a.total}}</td>
-    <td><a href="{% url 'movie' id=movie_a.user.id is_movie=0 %}">{{movie_a.user.username}}</a></td>
-    </tr>
-    {% endfor %}
-</table>
-<h3>{{ message }}</h3>
+<h1>Give your opinion, even though no one asked</h1>
 
-<p>Use this area to provide additional information.</p>
+<p>
+    Throw thoughtfulness and insight out the window.  This is strictly a place of 
+    reviews of movies by people who have no idea what they are talking about.
+</p>
 
 {% endblock %}
