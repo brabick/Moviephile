@@ -17,7 +17,7 @@
          </tr>
     <tr>
     <td>
-        <form action="{% url 'search_results' is_review=0 %}" method="get">
+        <form action="{% url 'search_results' %}" method="get">
         <input name="search_string" type="text" placeholder="Find a movie to review">
         <button type="submit">Submit</button>
         </form>
@@ -26,7 +26,7 @@
              | 
         </td>
     <td>
-        <form action="{% url 'search_results' is_review=1 %}" method="get">
+        <form action="{% url 'movie' id=1 is_movie=1 is_recent=0  %}" method="get">
         <input name="search_string" type="text" placeholder="Find a review">
         <button type="submit">Submit</button>
         </form>

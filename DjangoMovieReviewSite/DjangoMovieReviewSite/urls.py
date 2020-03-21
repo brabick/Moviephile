@@ -52,7 +52,7 @@ urlpatterns = [
 urlpatterns = urlpatterns + [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('search_results/<int:is_review>', app.views.search_results, name='search_results'),
+    path('search_results/', app.views.search_results, name='search_results'),
     url(r'^add_review/(?P<movie_id>\w+)/$', app.views.add_review, name='add_review'),
     url(r'^view_review/(?P<movie_score_id>\w+)/$', app.views.view_review, name='view_review'),
 ]

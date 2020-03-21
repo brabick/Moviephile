@@ -35,3 +35,13 @@ We are ALMOST to the point where I can actually start styling this thing.
 Auto summing total works, redirect to review after review is done works, just add data to that
 page.  Also, navigating from the page that shows all reviews for a movie to the singular review
 works
+
+3/16/2020
+Made a bunch of progress, I think I need to make a dank web scraper.
+Todo:
+Reformatting how the tables are displayed
+Build the index page
+Work on seach functions
+User settings page?
+Work on contact page
+Work on about page
