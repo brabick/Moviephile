@@ -57,6 +57,15 @@ class WikiScraper:
 				res.decompose()
 			for res in result.find_all('h2'):
 				res.decompose()
+			for res in result.find_all('a', class_='external text'):
+				res.decompose()
+			for res in result.text:
+				if res=='Privacy':
+					res.decompose()
+				if res=='Terms of Use':
+					res.decompose()
+				if res=='Desktop':
+					res.decompose()
 			print(result)
 
 		"""for a in self.result2:
