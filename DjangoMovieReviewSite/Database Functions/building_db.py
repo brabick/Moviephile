@@ -6,22 +6,14 @@ import os
 import xlrd
 import re
 import sys
+import conn_string
 
 
 class DatabaseSupport:
 	def __init__(self):
 		return
 
-	def conn_string(self):
 
-		self.connection = pymysql.connect(
-			host="localhost",
-			user="root",
-			passwd="my@llure32SQL",
-			db="movie_review_db",
-			autocommit=True
-		)
-		self.cursor = self.connection.cursor()
 
 	def insert_to_db_from_excel(self, title, year, genre):
 		try:

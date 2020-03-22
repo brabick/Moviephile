@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 DjangoMovieReviewSite/DjangoMovieReviewSite/my.cnf
 *.cnf
+DjangoMovieReviewSite/Database Functions/conn_string
