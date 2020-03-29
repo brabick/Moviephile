@@ -5,16 +5,14 @@
     <tr>
         <th>Title</th>
         <th>Release Year</th>
-        <th>Genre</th>
+        
     </tr>
     {% for movie_a in movie_info %}
         <tr>
-            <td><a href="{% url 'add_review' movie_id=movie_a.movie_id %}">
-            {{movie_a.movie_title}}
-            </a></td>
-            <td>{{movie_a.movie_release_year}}</td>
-            <td>{{movie_a.movie_genre}}</td>
-            
+            <td>
+            {{movie_a.Title}}
+            <td>
+            <td>{{movie_a.Year}}</td>            
         </tr>
     
     {% endfor %}

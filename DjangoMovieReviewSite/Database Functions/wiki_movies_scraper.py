@@ -5,6 +5,7 @@ import selenium
 from selenium.webdriver.chrome import webdriver
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import requests
 
 
 class WikiScraper:
@@ -73,9 +74,14 @@ class WikiScraper:
 			print(a.text)
 			self.cast.append(a.text)"""
 
-
 	def add_to_db(self, result, movie_id):
 		return
+
+	def omdb_call(self):
+		response = requests.get("http://www.omdbapi.com/?s=big&type=movie&apikey=2377553f")
+		print(response)
+		response = response.json()
+		print(response)
 
 
 
@@ -83,4 +89,4 @@ class WikiScraper:
 
 if __name__ == "__main__":
 	e = WikiScraper()
-	w = e.parse_result_page(e)
+	w = e.omdb_call()
