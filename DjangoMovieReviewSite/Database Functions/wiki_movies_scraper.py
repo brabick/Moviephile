@@ -5,6 +5,7 @@ import selenium
 from selenium.webdriver.chrome import webdriver
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import requests
 
 
 class WikiScraper:
@@ -35,16 +36,11 @@ class WikiScraper:
 	def parse_result_page(self, page_source):
 		self.selenium()
 		self.cast = []
-		self.browser.get("https://en.m.wikipedia.org/wiki/Zero_for_Conduct")
+		self.browser.get("https://en.m.wikipedia.org/wiki/Zero_Tolerance_(1995_film))")
 		soup = bs4.BeautifulSoup(self.browser.page_source, 'html.parser')
-		#print(soup.prettify())
-		#for a in soup.stripped_strings:
-			#print(a)
-		#self.result2 = soup.select('div > div > section > div > ul > li > a')
-
 		self.result2 = soup.find_all('li', id_=None, class_=None)
+		print(self.result2[0])
 		for result in self.result2:
-			#print(result)
 			for res in result.find_all('b'):
 				res.decompose()
 			for res in result.find_all('i'):
@@ -57,15 +53,35 @@ class WikiScraper:
 				res.decompose()
 			for res in result.find_all('h2'):
 				res.decompose()
-			print(result)
+			for res in result.find_all('a', class_='external text'):
+				res.decompose()
+			for res in result.find_all('a', class_='extiw'):
+				res.decompose()
+			for res in result.find_all('li', id_='footer-places-desktop-toggle'):
+				res.decompose()
+			for res in result.find_all('li', id_='footer-places-terms-use'):
+				res.decompose()
+			for res in result.find_all('a', href_='/wiki/Internet_Archive'):
+				res.decompose()
+
+		self.result2 = self.result2[:-10]
+
+		section = soup.find_all('div', class_="div-col columns column-width")
+#		print(section[0])
+
 
 		"""for a in self.result2:
 			print(a.text)
 			self.cast.append(a.text)"""
 
-
 	def add_to_db(self, result, movie_id):
 		return
+
+	def omdb_call(self):
+		response = requests.get("http://www.omdbapi.com/?s=big&type=movie&apikey=2377553f")
+		print(response)
+		response = response.json()
+		print(response)
 
 
 
@@ -73,4 +89,4 @@ class WikiScraper:
 
 if __name__ == "__main__":
 	e = WikiScraper()
-	w = e.parse_result_page(e)
+	w = e.omdb_call()

@@ -3,6 +3,7 @@ Definition of views.
 """
 
 from django.shortcuts import render, redirect
+from app import hidden_stuff
 from app.models import tbl_movies, tbl_movie_scores
 from django.http import HttpRequest
 from django.template import RequestContext
@@ -13,6 +14,7 @@ from app.forms import SignUpForm, tbl_movie_scores_form
 from django.contrib.auth import login, authenticate
 from django.db.models import Sum
 from django.contrib.auth.models import User
+import requests
 
 
 def home(request):
@@ -105,12 +107,15 @@ def movie(request, id, is_movie, is_recent):
 def search_results(request):
    assert isinstance(request, HttpRequest)
    query = request.GET.get('search_string') 
-   results = tbl_movies.objects.filter(movie_title__icontains=query)
+   #results = tbl_movies.objects.filter(movie_title__icontains=query)
+   results = requests.get("http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+   results = results.json()
+   info = results['Search']
    return render(
        request, 
        'app/search_results.html',
         {
-        'movie_info': results,
+        'movie_info': info,
         'null_message': 'There are no reviews for this movie, add one today!',
         'year':datetime.now().year,
         }

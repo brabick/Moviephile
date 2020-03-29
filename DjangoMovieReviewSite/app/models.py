@@ -12,6 +12,7 @@ class tbl_movies(models.Model):
     movie_title = models.CharField(max_length=80)
     movie_genre = models.CharField(max_length=80)
     movie_release_year = models.CharField(max_length=80)
+    movie_poster = models.ImageField(null=True)
 
 class tbl_movie_scores(models.Model):
     movie = models.ForeignKey(tbl_movies, on_delete=models.CASCADE)
