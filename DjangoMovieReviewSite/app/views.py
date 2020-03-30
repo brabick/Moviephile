@@ -16,7 +16,7 @@ from django.db.models import Sum
 from django.contrib.auth.models import User
 import requests
 
-
+# Home page! Nothing interesting right now
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -30,6 +30,7 @@ def home(request):
         
     )
 
+# Same as home page
 def contact(request):
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
@@ -60,6 +61,7 @@ def about(request):
         }
     )
 
+# straight forward sign up. Resides in the log in partial and its own form
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -74,6 +76,13 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+# This is where we can view different reviews that are in the database.
+# Depending on the information that is passed we will either
+# Show 10 reviews by a user
+# Show reviews of a specific movie
+# or
+# Show the 10 most recent reviews
+# This is call controlled on where the user clicks and searches
 def movie(request, id, is_movie, is_recent):
     assert isinstance(request, HttpRequest)
     if is_recent==1:
@@ -102,12 +111,12 @@ def movie(request, id, is_movie, is_recent):
         }
     )
 
-
-
+# Makes a request to the OMDb API and plops the search results into
+# A page. The has clickable links to go to reviews of that movie
 def search_results(request):
    assert isinstance(request, HttpRequest)
    query = request.GET.get('search_string') 
-   #results = tbl_movies.objects.filter(movie_title__icontains=query)
+   # API request
    results = requests.get("http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
    results = results.json()
    info = results['Search']
@@ -121,6 +130,9 @@ def search_results(request):
         }
        )
 
+
+# You gotta be in to create a review. Accesses the form created to add the review
+# to the db
 @login_required
 def add_review(request, movie_id):
     assert isinstance(request, HttpRequest)
@@ -130,6 +142,7 @@ def add_review(request, movie_id):
         form = tbl_movie_scores_form(request.POST)
         if form.is_valid():
             review = form.save()
+            # Calculates the total based off of the input scores
             review.total = (review.score + review.acting + review.cinematography + review.story_telling +
             review.plausibility + review.cast + review.effects + review.fun_factor + review.originality +
             review.characters)
@@ -160,6 +173,7 @@ def add_review(request, movie_id):
             }
         )
 
+# View for viewing a review!
 def view_review(request, movie_score_id):
     assert isinstance(request, HttpRequest)
     review = tbl_movie_scores.objects.get(pk=movie_score_id)
