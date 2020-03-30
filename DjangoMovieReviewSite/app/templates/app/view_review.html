@@ -1,7 +1,7 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
-<h1>Review for {{review_info.movie.movie_title}} by {{review_info.user.username}}</h1>
+<h1>Review for {{review_info.title}} by {{review_info.user.username}}</h1>
 <table>
     <tr>
         <th>Music</th>
@@ -54,5 +54,6 @@
         
     
 </table>
-
+<hr />
+{{review_info.movie_id}}
 {% endblock %}

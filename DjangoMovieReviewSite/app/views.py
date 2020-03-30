@@ -48,13 +48,10 @@ def contact(request):
 def about(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
-    order_by = request.GET.get('order_by', 'created_at')
-    movie = tbl_movie_scores.objects.all().order_by(order_by)[:10]
     return render(
         request,
         'app/about.html',
         {
-            'movies':movie,
             'message':'Above are the ten most recent reviews! Click on a title to \
             see what made that movie so great.',
             'year':datetime.now().year,
