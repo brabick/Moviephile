@@ -15,7 +15,7 @@ class tbl_movies(models.Model):
     movie_poster = models.ImageField(null=True)
 
 class tbl_movie_scores(models.Model):
-    movie = models.ForeignKey(tbl_movies, on_delete=models.CASCADE)
+    movie_id = models.CharField(max_length=40, null=True)
     movie_score_id = models.AutoField(primary_key=True)
     score = models.IntegerField(validators=[
             MaxValueValidator(10),

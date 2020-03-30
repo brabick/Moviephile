@@ -10,7 +10,9 @@
     {% for movie_a in movie_info %}
         <tr>
             <td>
+                <a href="{% url 'add_review' movie_id=movie_a.imdbID  %}">
             {{movie_a.Title}}
+                    </a>
             <td>
             <td>{{movie_a.Year}}</td>            
         </tr>

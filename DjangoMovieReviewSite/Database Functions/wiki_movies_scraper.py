@@ -78,10 +78,12 @@ class WikiScraper:
 		return
 
 	def omdb_call(self):
-		response = requests.get("http://www.omdbapi.com/?s=big&type=movie&apikey=2377553f")
-		print(response)
-		response = response.json()
-		print(response)
+		#response = requests.get("http://www.omdbapi.com/?s=big&type=movie&apikey=2377553f")
+		#print(response)
+		#response = response.json()
+		#print(response)
+		response = requests.get("http://www.omdbapi.com/?i=tt7468616&apikey=2377553f")
+		print(response.json())
 
 
 

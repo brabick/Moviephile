@@ -136,7 +136,8 @@ def search_results(request):
 @login_required
 def add_review(request, movie_id):
     assert isinstance(request, HttpRequest)
-    movie = tbl_movies.objects.get(pk=movie_id)
+    movie = requests.get("http://www.omdbapi.com/?i=" + movie_id + "&apikey=" + hidden_stuff.API_KEY)
+    movie = movie.json()
     user = request.user
     if request.method=='POST':
         form = tbl_movie_scores_form(request.POST)
@@ -177,10 +178,12 @@ def add_review(request, movie_id):
 def view_review(request, movie_score_id):
     assert isinstance(request, HttpRequest)
     review = tbl_movie_scores.objects.get(pk=movie_score_id)
+    movie = requests.get("http://www.omdbapi.com/?i=" + review.movie_id + "&apikey=" + hidden_stuff.API_KEY)
     return render(
         request,
         'app/view_review.html',
         {
+            'movie_info': movie,
             'review_info':review
         }
     )
