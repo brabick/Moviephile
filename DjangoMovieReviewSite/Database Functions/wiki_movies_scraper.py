@@ -83,7 +83,8 @@ class WikiScraper:
 		#response = response.json()
 		#print(response)
 		response = requests.get("http://www.omdbapi.com/?i=tt7468616&apikey=2377553f")
-		print(response.json())
+		json = response.json()
+		print(json.get('Title'))
 
 
 

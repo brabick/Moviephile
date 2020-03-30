@@ -262,3 +262,4 @@ __pycache__/
 DjangoMovieReviewSite/DjangoMovieReviewSite/my.cnf
 *.cnf
 DjangoMovieReviewSite/app/hidden_stuff.py
+DjangoMovieReviewSite/Database Functions/wiki_movies_scraper.py

@@ -152,6 +152,7 @@ def add_review(request, movie_id):
             review.characters)
             review.user_id = user.id
             review.movie_id = movie_id
+            review.title = movie.get('Title')
             review.save()
 
             return redirect('view_review', movie_score_id=review.movie_score_id)
