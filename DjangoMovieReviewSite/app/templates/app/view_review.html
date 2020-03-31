@@ -2,6 +2,18 @@
 
 {% block content %}
 <h1>Review for {{review_info.title}} by {{review_info.user.username}}</h1>
+<div class="col-md-6">
+    <img src="{{movie_info.Poster}}" />
+</div>
+<div class="col-md-6">
+    <p>
+       Cast: {{movie_info.Actors}}    
+    </p>
+    <p>
+        Plot: {{movie_info.Plot}}
+    </p>
+</div>
+<hr />
 <table>
     <tr>
         <th>Music</th>
@@ -52,6 +64,5 @@
     </tr>
 
 </table>
-<hr />
-<img src="{{movie_info.Poster}}" />
+
 {% endblock %}

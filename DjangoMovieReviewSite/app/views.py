@@ -82,6 +82,8 @@ def signup(request):
 # This is call controlled on where the user clicks and searches
 def movie(request, id, is_movie, is_recent):
     assert isinstance(request, HttpRequest)
+    if id==1:
+        movie = 0
     # If we are just getting the recent movie reviews
     if is_recent==1:
         movie = tbl_movie_scores.objects.all()[:10]
@@ -90,7 +92,7 @@ def movie(request, id, is_movie, is_recent):
     # If we are browsing reviews based off of a criteria
     elif is_movie == 1:
         query = request.GET.get('search_string')
-        movie = tbl_movie_scores.objects.filter(movie__movie_title__icontains=query)
+        movie = tbl_movie_scores.objects.filter(title__icontains=query)
         header = "All Reviews with '" + query + "' in the title"
         message = "noice"
     # If we are searching for reviews by a specific user
