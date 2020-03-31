@@ -259,8 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-DjangoMovieReviewSite/DjangoMovieReviewSite/my.cnf
-*.cnf
-DjangoMovieReviewSite/app/hidden_stuff.py
+
 DjangoMovieReviewSite/Database Functions/wiki_movies_scraper.py
 
