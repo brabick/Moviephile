@@ -34,7 +34,7 @@ class tbl_movie_scores_form(ModelForm):
     class Meta:
         model = tbl_movie_scores
         fields = '__all__'
-        widgets = {'movie': forms.HiddenInput(),
+        widgets = {'movie_id':forms.HiddenInput(),
                   'user': forms.HiddenInput(),
                   'total': forms.HiddenInput(),
                   'created_at': forms.HiddenInput(),

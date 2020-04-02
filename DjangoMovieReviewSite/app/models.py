@@ -15,9 +15,9 @@ class tbl_movies(models.Model):
     movie_poster = models.ImageField(null=True)
 
 class tbl_movie_scores(models.Model):
-    movie_id = models.CharField(max_length=40, null=True)
-    title = models.CharField(max_length=200, null=True)
     movie_score_id = models.AutoField(primary_key=True)
+    movie_id = models.CharField(max_length=40, blank=True, null=True)
+    title = models.CharField(max_length=200, null=True)
     score = models.IntegerField(validators=[
             MaxValueValidator(10),
             MinValueValidator(0)])

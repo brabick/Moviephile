@@ -150,7 +150,7 @@ def add_review(request, movie_id):
             review.plausibility + review.cast + review.effects + review.fun_factor + review.originality +
             review.characters)
             review.user_id = user.id
-            review.movie_id = movie_id
+            review.movie_id = movie.get('imdbID')
             review.title = movie.get('Title')
             review.save()
 
