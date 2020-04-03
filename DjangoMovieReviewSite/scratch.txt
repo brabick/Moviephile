@@ -14,7 +14,7 @@ displaying correct records
 custom message if no records exist.
 
 2/22/20
-Related as fuck!
+Related as f!
 Need to add:
 
 Search,
@@ -45,3 +45,23 @@ Work on seach functions
 User settings page?
 Work on contact page
 Work on about page
+
+3/30/2020
+I have been working on this, I promise.
+What I need to work on:
+Build the index page
+--Navigation?
+--What do I want to say?
+Work on seach functions
+--Search movies by actor and maybe year?
+User settings page?
+--I'm not sure what setting I would add at this point
+Work on contact page
+--Writing copy
+Work on about page
+--Writing copy
+General Beautification and page structure
+
+Wants hidden field movie id in add review
+
+Before that, merge add_review and view_review into one page
