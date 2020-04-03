@@ -63,6 +63,7 @@
     <Folder Include="DjangoMovieReviewSite\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\content\index.css" />
     <Content Include="app\templates\app\add_review.html" />
     <Content Include="app\templates\app\movie.html">
       <SubType>Code</SubType>
