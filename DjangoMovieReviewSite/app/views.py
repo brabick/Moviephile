@@ -141,6 +141,7 @@ def add_review(request, movie_id):
     movie = requests.get("http://www.omdbapi.com/?i=" + movie_id + "&apikey=" + hidden_stuff.API_KEY)
     movie = movie.json()
     user = request.user
+    add_review = 1
     if request.method=='POST':
         form = tbl_movie_scores_form(request.POST)
         if form.is_valid():
@@ -159,10 +160,11 @@ def add_review(request, movie_id):
             
             return render(
             request,
-            'app/add_review.html',
+            'app/view_review.html',
             {
             'form':form,
             'movie_info': movie,
+            'add_review': add_review
             }
         )
 
@@ -170,10 +172,11 @@ def add_review(request, movie_id):
         form = tbl_movie_scores_form()
         return render(
             request,
-            'app/add_review.html',
+            'app/view_review.html',
             {
             'form':form,
             'movie_info': movie,
+            'add_review': add_review
             }
         )
 
@@ -184,11 +187,13 @@ def view_review(request, movie_score_id):
     id = review.movie_id
     movie = requests.get("http://www.omdbapi.com/?i=" + id + "&apikey=" + hidden_stuff.API_KEY)
     movie = movie.json()
+    add_review = 0
     return render(
         request,
         'app/view_review.html',
         {
             'movie_info': movie,
-            'review_info':review
+            'review_info':review,
+            'add_review':add_review
         }
     )

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-light bg-danger sticky-top">
+    <nav class="navbar navbar-expand navbar-light bg-danger fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a href="/" class="navbar-brand">Moviephile</a>
@@ -27,8 +27,8 @@
             <div class="navbar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'movie' id=1 is_movie=0 is_recent=1 %}">Recent Reviews</a></li>
-                    <li><a class="nav-link"  href="{% url 'contact' %}">Contact</a></li>
-                    <li><a class="nav-link"  href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'contact' %}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'about' %}">About</a></li>
                     
                 </ul>
                 {% include 'app/loginpartial.html' %}

@@ -1,6 +1,7 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
+{% ifequal add_review 0 %}
 <h1>Review for {{review_info.title}} by {{review_info.user.username}}</h1>
 <div class="col-md-6">
     <img src="{{movie_info.Poster}}" />
@@ -64,5 +65,23 @@
     </tr>
 
 </table>
+{% endifequal %}
+{% ifequal add_review 1 %}
+<div class="col-md-6">
+<h2>{{movie_info.Title}}, {{movie_info.Year}}</h2>
+    
+
+<form action="" method="post">
+    {% csrf_token %}
+        <table>
+        {{form.as_table}}
+        </table>
+    <button type="submit">Submit</button>
+</form>
+        </div>
+<div class="col-sm-1">
+<img src="{{movie_info.Poster}}" />
+    </div>
+{% endifequal %}
 
 {% endblock %}

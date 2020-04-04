@@ -33,9 +33,7 @@ class SignUpForm(UserCreationForm):
 class tbl_movie_scores_form(ModelForm):
     class Meta:
         model = tbl_movie_scores
-        fields = '__all__'
-        widgets = {'movie_id':forms.HiddenInput(),
-                  'user': forms.HiddenInput(),
-                  'total': forms.HiddenInput(),
-                  'created_at': forms.HiddenInput(),
-                  'updated_at': forms.HiddenInput()}
+        fields = [
+            'score', 'cinematography', 'story_telling', 'acting', 'plausibility',
+            'cast', 'effects', 'fun_factor', 'originality', 'characters', 'review'
+            ]
