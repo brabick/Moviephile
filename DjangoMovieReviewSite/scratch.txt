@@ -65,3 +65,21 @@ General Beautification and page structure
 Wants hidden field movie id in add review
 
 Before that, merge add_review and view_review into one page
+
+Before Launch--
+1.Choose and implement color scheme
+*Chosen
+2.Tweak Index
+-Search cards with better spacing
+-Fit everything within the same margins
+-New Jumbotron
+3.Search Pages
+-Overall styling
+-Sort columns by their content
+-Redo "use this area" text
+4.About Page
+-Finish wall 'o text
+-Make it more interesting somehow
+5.Review pages
+-Complete overhaul of looks
+6.All references to Moviephile

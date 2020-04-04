@@ -21,12 +21,15 @@
     <hr />
 </div>
 
-<div class="container">
+<div class="container review_cards">
     <div class="card">
         <div class="card-header">
             Add a review!
         </div>
         <div class="card-body">
+            Use this form to find a movie to review. Search by the movie title (for now...)
+        </div>
+        <div class="card-footer">
             <form action="{% url 'search_results' %}" method="get">
         <input name="search_string" type="text" placeholder="Find a movie to review">
         <button type="submit">Submit</button>
@@ -38,6 +41,9 @@
             Read a review!
         </div>
         <div class="card-body">
+            Use <i>this</i> form to find how people have scored your favorite movies!
+        </div>
+        <div class="card-footer">
             <form action="{% url 'movie' id=1 is_movie=1 is_recent=0  %}" method="get">
         <input name="search_string" type="text" placeholder="Find a review">
         <button type="submit">Submit</button>

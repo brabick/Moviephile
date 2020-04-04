@@ -34,6 +34,6 @@ class tbl_movie_scores_form(ModelForm):
     class Meta:
         model = tbl_movie_scores
         fields = [
-            'score', 'cinematography', 'story_telling', 'acting', 'plausibility',
+            'sound', 'cinematography', 'story_telling', 'acting', 'plausibility',
             'cast', 'effects', 'fun_factor', 'originality', 'characters', 'review'
             ]

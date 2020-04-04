@@ -147,7 +147,7 @@ def add_review(request, movie_id):
         if form.is_valid():
             review = form.save()
             # Calculates the total based off of the input scores
-            review.total = (review.score + review.acting + review.cinematography + review.story_telling +
+            review.total = (review.sound + review.acting + review.cinematography + review.story_telling +
             review.plausibility + review.cast + review.effects + review.fun_factor + review.originality +
             review.characters)
             review.user_id = user.id

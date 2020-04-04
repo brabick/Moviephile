@@ -1,17 +1,56 @@
-body {
+/*Body*/
+
+body 
+{
 }
 
-.navbar
-{
-    max-height: 65px;
-    vertical-align: bottom
-}
 
-.nav-item 
-{
-    padding:0 8px 0 8px;
-}
 .body-content {
     padding-top: 2%;
 }
 
+/*Navbar*/
+.navbar {
+    max-height: 65px;
+    vertical-align: bottom;
+    background-color: #4F5165;
+}
+
+nav
+{
+    background-color: #4F5165;
+}
+.jumbotron {
+    background-color: #CDCDCD;
+    color: #293132 !important;
+}
+
+.jumbotron {
+    color: #293132 !important;
+}
+.nav-item 
+{
+    color: #E3E4DB;
+    padding: 0 8px 0 8px;
+}
+.navbar-brand {
+    color: #E3E4DB !important;
+}
+.nav-link 
+{
+    color: #E3E4DB !important;
+}
+/*Index*/
+.review_cards 
+{
+    display: inline-flex;
+}
+
+ul.cat-descriptions 
+{
+    list-style: none;
+}
+h2.cat-descriptions
+{
+    text-decoration:underline;
+}
