@@ -39,7 +39,7 @@ def contact(request):
         'app/contact.html',
         {
             'title':'Contact',
-            'message':'Your contact page.',
+            'message':'I like movies and coding',
             'year':datetime.now().year,
         }
     )
