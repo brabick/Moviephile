@@ -20,14 +20,7 @@ nav
 {
     background-color: #4F5165;
 }
-.jumbotron {
-    background-color: #CDCDCD;
-    color: #293132 !important;
-}
 
-.jumbotron {
-    color: #293132 !important;
-}
 .nav-item 
 {
     color: #E3E4DB;
@@ -53,4 +46,27 @@ ul.cat-descriptions
 h2.cat-descriptions
 {
     text-decoration:underline;
+}
+.jumbotron {
+    background-color: #E3E4DB;
+    color: #797477;
+}
+
+#moviephile {
+    color: #474044;
+}
+.index-card {
+    border-color: #3C4344;
+    margin: 1%;
+    max-width: 50%;
+}
+.index-card-header {
+    background-color: #E3E4DB;
+}
+.index-card-header {
+    color: #474044;
+}
+#about-moviephile {
+    color: #474044;
+    text-decoration: underline;
 }

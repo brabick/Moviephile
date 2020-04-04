@@ -73,6 +73,7 @@ Before Launch--
 -Search cards with better spacing
 -Fit everything within the same margins
 -New Jumbotron
+DONE
 3.Search Pages
 -Overall styling
 -Sort columns by their content

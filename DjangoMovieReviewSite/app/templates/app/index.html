@@ -1,20 +1,20 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-
+<div class="container">
 <div class="jumbotron">
-    <h1>Moviephile</h1>
+    <h1 id="moviephile">Moviephile</h1>
     <p class="lead">A place for uninformed, unwanted and uninitiated movie reviews!</p>
 </div>
 <div>
-    <h2>About Moviephile</h2>
+    <h2 id="about-moviephile">About Moviephile</h2>
     <p>
         We make no reservations about the fact that we <i>don't</i> know what we're talking about.
-        This site is for the self-taught wannabe movie reviewer. <br />
+        This site is for the self-taught wannabe movie reviewer.
         It's like you're friend that went to one wine tasting class and now pretends to like 
-        red wine even though everyone knows red wine is awful. <br />
+        red wine even though everyone knows red wine is awful.
         So come in, take a seat, browse around. Below are a few different search options.
-        You can search by movie title, or find reviews made by <br />
+        You can search by movie title, or find reviews made by
         other people so that you can feel better about how much <i>you</i> know about movies.
         <br />
     </p>
@@ -22,9 +22,9 @@
 </div>
 
 <div class="container review_cards">
-    <div class="card">
-        <div class="card-header">
-            Add a review!
+    <div class="card index-card">
+        <div class="card-header index-card-header">
+            <h4 class="index-card-header">Add a review!</h4>
         </div>
         <div class="card-body">
             Use this form to find a movie to review. Search by the movie title (for now...)
@@ -36,9 +36,9 @@
         </form>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header">
-            Read a review!
+    <div class="card index-card">
+        <div class="card-header index-card-header">
+            <h4>Read a review!</h4>
         </div>
         <div class="card-body">
             Use <i>this</i> form to find how people have scored your favorite movies!
@@ -51,5 +51,5 @@
         </div>
     </div>
 </div>
-
+    </div>
 {% endblock %}
