@@ -34,8 +34,8 @@ nav
     color: #E3E4DB !important;
 }
 /*Index*/
-.review_cards 
-{
+.review_cards {
+    padding: 0;
     display: inline-flex;
 }
 
@@ -49,24 +49,42 @@ h2.cat-descriptions
 }
 .jumbotron {
     background-color: #E3E4DB;
-    color: #797477;
+    
 }
 
 #moviephile {
-    color: #474044;
+    
 }
 .index-card {
     border-color: #3C4344;
     margin: 1%;
     max-width: 50%;
+    
 }
 .index-card-header {
     background-color: #E3E4DB;
 }
 .index-card-header {
-    color: #474044;
+    
 }
 #about-moviephile {
-    color: #474044;
+    
     text-decoration: underline;
+}
+
+/*Movie*/
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+table {
+    width: 80%;
+}
+th, td {
+    padding: 5px;
+}
+th {
+    background-color: #CDCDCD;
+}
+.review_page {
+    display:inline-flex;
 }

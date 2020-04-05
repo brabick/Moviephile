@@ -73,11 +73,13 @@ Before Launch--
 -Search cards with better spacing
 -Fit everything within the same margins
 -New Jumbotron
-DONE
+*Done
 3.Search Pages
 -Overall styling
+*Done
 -Sort columns by their content
 -Redo "use this area" text
+*Done
 4.About Page
 -Finish wall 'o text
 -Make it more interesting somehow

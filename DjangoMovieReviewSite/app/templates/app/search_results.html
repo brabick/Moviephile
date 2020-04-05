@@ -1,6 +1,9 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
+<h3>Results for... whatever you searched.</h3>
+<p>Here are a few movies matching your search... you might need to refine it...</p>
+
 <table>
     <tr>
         <th>Title</th>
@@ -13,15 +16,13 @@
                 <a href="{% url 'add_review' movie_id=movie_a.imdbID  %}">
             {{movie_a.Title}}
                     </a>
-            <td>
             <td>{{movie_a.Year}}</td>            
         </tr>
-    
     {% endfor %}
 
 </table>
 <h3>{{ message }}</h3>
 
-<p>Use this area to provide additional information.</p>
+
 
 {% endblock %}
