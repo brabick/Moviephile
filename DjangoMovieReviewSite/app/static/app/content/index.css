@@ -88,3 +88,24 @@ th {
 .review_page {
     display:inline-flex;
 }
+
+/*Review*/
+
+.review_table th, td {
+    border: 1px solid #ddd !important;
+}
+
+.review_table {
+    width:25%;
+    
+    display:inline-flex;
+}
+
+.review_tables {
+    display:inline-flex;
+}
+
+.review {
+    column-span: inherit;
+    top: -350px;
+}

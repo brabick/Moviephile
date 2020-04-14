@@ -2,6 +2,8 @@
 
 {% block content %}
 <h3>Results for... whatever you searched.</h3>
+{% if movie_info %}
+
 <p>Here are a few movies matching your search... you might need to refine it...</p>
 
 <table>
@@ -22,7 +24,8 @@
 
 </table>
 <h3>{{ message }}</h3>
-
-
+{% else %}
+<h4>{{null_message}}</h4>
+{% endif %}
 
 {% endblock %}

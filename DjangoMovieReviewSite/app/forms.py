@@ -22,13 +22,13 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'placeholder':'Password'}))
 
 class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text="We don't need this!")
-    last_name = forms.CharField(max_length=30, required=False, help_text="We don't need this!")
-    email = forms.EmailField(max_length=254, help_text='Gimme dis')
+    first_name = forms.CharField(max_length=30, required=False)
+    last_name = forms.CharField(max_length=30, required=False)
+    email = forms.EmailField(max_length=254)
         
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', ]
 
 class tbl_movie_scores_form(ModelForm):
     class Meta:
