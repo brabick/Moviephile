@@ -57,6 +57,7 @@
     <Folder Include="app\static\app\content\" />
     <Folder Include="app\static\app\fonts\" />
     <Folder Include="app\static\app\scripts\" />
+    <Folder Include="app\static\pictures\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="app\templates\registration\" />
@@ -64,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\static\app\content\index.css" />
+    <Content Include="app\static\pictures\dogs.jpg" />
     <Content Include="app\templates\app\movie.html">
       <SubType>Code</SubType>
     </Content>

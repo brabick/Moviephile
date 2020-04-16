@@ -1,7 +1,6 @@
 /*Body*/
 
-body 
-{
+body {
 }
 
 
@@ -16,21 +15,20 @@ body
     background-color: #4F5165;
 }
 
-nav
-{
+nav {
     background-color: #4F5165;
 }
 
-.nav-item 
-{
+.nav-item {
     color: #E3E4DB;
     padding: 0 8px 0 8px;
 }
+
 .navbar-brand {
     color: #E3E4DB !important;
 }
-.nav-link 
-{
+
+.nav-link {
     color: #E3E4DB !important;
 }
 /*Index*/
@@ -39,36 +37,35 @@ nav
     display: inline-flex;
 }
 
-ul.cat-descriptions 
-{
+ul.cat-descriptions {
     list-style: none;
 }
-h2.cat-descriptions
-{
-    text-decoration:underline;
+
+h2.cat-descriptions {
+    text-decoration: underline;
 }
+
 .jumbotron {
     background-color: #E3E4DB;
-    
 }
 
 #moviephile {
-    
 }
+
 .index-card {
     border-color: #3C4344;
     margin: 1%;
     max-width: 50%;
-    
 }
+
 .index-card-header {
     background-color: #E3E4DB;
 }
+
 .index-card-header {
-    
 }
+
 #about-moviephile {
-    
     text-decoration: underline;
 }
 
@@ -76,36 +73,47 @@ h2.cat-descriptions
 th, td {
     border-bottom: 1px solid #ddd;
 }
+
 table {
     width: 80%;
 }
+
 th, td {
     padding: 5px;
 }
+
 th {
     background-color: #CDCDCD;
 }
-.review_page {
-    display:inline-flex;
-}
 
 /*Review*/
+table.review_table td,
+table.review_table th {
+    border: 1px solid #ddd;
+}
 
-.review_table th, td {
-    border: 1px solid #ddd !important;
+table.review_table th{
+    background-color: #f2f2f2;
 }
 
 .review_table {
-    width:25%;
-    
-    display:inline-flex;
+    width: 25%;
+    display: inline-flex;
 }
 
 .review_tables {
-    display:inline-flex;
+    display: inline-flex;
 }
 
 .review {
     column-span: inherit;
     top: -350px;
+}
+
+.review_page {
+    display: inline-flex;
+}
+
+#dogs {
+    max-height:450px;
 }

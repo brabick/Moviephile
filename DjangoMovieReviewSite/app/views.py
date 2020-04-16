@@ -114,16 +114,13 @@ def search_results(request):
    assert isinstance(request, HttpRequest)
    query = request.GET.get('search_string') 
    # API request
-   results = requests.get("http://www.omdbapi.com/?s=" + query + "&totalResults=10&type=movie&apikey=" + hidden_stuff.API_KEY)
+   results = requests.get("http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
    results = results.json()
    if 'Error' in results:
-       results = {}
-       return render(request,
-           'app/search_results.html',
-        {
-        'null_message': 'There were too many results and I got cofused, be a little more specific?',
-        'year':datetime.now().year,
-        })
+       results = requests.get("http://www.omdbapi.com/?t=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+       results = results.json()
+       
+       return redirect('add_review', movie_id=results.get('imdbID'))
    else:
        info = results['Search']
        return render(request, 
@@ -165,7 +162,7 @@ def add_review(request, movie_id):
             'form':form,
             'movie_info': movie,
             'add_review': add_review,
-            'totalzzz': range(77)
+            'header': movie.get('Title') + ', ' + movie.get('Year')
             })
 
     else:
@@ -176,7 +173,7 @@ def add_review(request, movie_id):
             'form':form,
             'movie_info': movie,
             'add_review': add_review,
-            
+            'header': movie.get('Title') + ', ' + movie.get('Year')
             })
 
 # View for viewing a review!
@@ -193,7 +190,8 @@ def view_review(request, movie_score_id):
             'movie_info': movie,
             'review_info':review,
             'add_review':add_review,
-            'total': range(review.total)
+            'total': range(review.total),
+            'header': 'Review for ' + movie.get('Title')
         })
 
 register = Library()
