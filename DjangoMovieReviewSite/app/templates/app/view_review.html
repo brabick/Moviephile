@@ -7,14 +7,21 @@
 {% ifequal add_review 0 %}
     
     
-    <div class="col-md-2 review_tables">
+    <div class="col-md-6 review_tables">
 
 <table class="review_table">
+    <tr>
+          <td id="no_border" colspan="12"><h4>{{ review_info.total }} Thumbs Up!</h4>
+        {% for i in total %}
+            &#128077;
+        {% endfor %}</td>
+    </tr>
+    <tr></tr>
     <tr>
         <th>Sound</th>
         <td>{{review_info.sound}}</td>
         
-
+        
     </tr>
     <tr>
         <th>Cinematography</th>
@@ -49,21 +56,39 @@
         <td>{{review_info.originality}}</td>
     </tr>
     <tr>
-        <th>Characters</th>
+        <th id="n_b">Characters</th>
+        
         <td>{{review_info.characters}}</td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+        <td id="n_b2"></td>
+
+
+    </tr>
+    <tr>
+        <td id="no_border" colspan="12">
+        {% if review_info.review %}
+
+        <h2>Review</h2>
+        <hr />
+        {{review_info.review}}
+        {% endif %}</td>
     </tr>
 </table>
 
 
     </div>
-    <div class="col-md-3 class">
-        <h4>{{ review_info.total }} Thumbs Up!</h4>
-        {% for i in total %}
-            &#128077;
-        {% endfor %}
-
-        </div>
-
 {% endifequal %}
 {% ifequal add_review 1 %}
 <div class="col-md-6">
@@ -94,13 +119,4 @@
 
     </div>
 
-    <div class="col-md-5 review">
-        
- <p>{% if review_info.review %}
-
-        <h2>Review</h2>
-        <hr />
-        {{review_info.review}}
-        {% endif %}</p>  
-    </div>
 {% endblock %}

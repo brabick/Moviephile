@@ -97,7 +97,7 @@ table.review_table th{
 }
 
 .review_table {
-    width: 25%;
+    width: 100%;
     display: inline-flex;
 }
 
@@ -107,7 +107,7 @@ table.review_table th{
 
 .review {
     column-span: inherit;
-    top: -350px;
+    
 }
 
 .review_page {
@@ -116,4 +116,14 @@ table.review_table th{
 
 #dogs {
     max-height:450px;
+}
+#no_border {
+    border: none;
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+
+#n_b2 {
+    border: solid white;
+    border-left: 1px solid #ddd;
 }

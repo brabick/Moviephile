@@ -32,7 +32,7 @@
         <div class="card-footer">
             <form action="{% url 'search_results' %}" method="get">
         <input name="search_string" type="text" placeholder="Find a movie to review">
-        <button class="btn btn-outline-secondary" type="submit">Submit</button>
+        <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
         </form>
         </div>
     </div>
@@ -46,7 +46,7 @@
         <div class="card-footer">
             <form action="{% url 'movie' id=1 is_movie=1 is_recent=0  %}" method="get">
         <input name="search_string" type="text" placeholder="Find a review">
-        <button class="btn btn-outline-secondary" type="submit">Submit</button>
+        <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
         </form>
         </div>
     </div>
