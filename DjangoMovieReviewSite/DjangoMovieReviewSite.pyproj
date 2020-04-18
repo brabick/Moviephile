@@ -66,6 +66,7 @@
   <ItemGroup>
     <Content Include="app\static\app\content\index.css" />
     <Content Include="app\static\pictures\dogs.jpg" />
+    <Content Include="app\static\pictures\felix-mooneeram-evlkOfkQ5rE-unsplash %281%29.jpg" />
     <Content Include="app\templates\app\movie.html">
       <SubType>Code</SubType>
     </Content>
