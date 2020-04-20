@@ -1,4 +1,4 @@
-﻿{% extends "app/layout.html" %}
+{% extends "app/layout.html" %}
 
 {% block content %}
 
@@ -7,14 +7,14 @@
     <p>
         We make no reservations about the fact that we <i>don't</i> know what we're talking about.
         This site is for the self-taught wannabe movie reviewer.
-        It's like you're friend that went to one wine tasting class and now pretends to like 
+        It's like you're friend that went to one wine tasting class and now pretends to like
         red wine even though everyone knows red wine is awful.
         So come in, take a seat, browse around. Below are a few different search options.
         You can search by movie title, or find reviews made by
         other people so that you can feel better about how much <i>you</i> know about movies.
-        <br />
+        <br/>
     </p>
-    <hr />
+    <hr/>
 </div>
 
 <div class="container review_cards">
@@ -27,9 +27,9 @@
         </div>
         <div class="card-footer">
             <form action="{% url 'search_results' %}" method="get">
-        <input name="search_string" type="text" placeholder="Find a movie to review">
-        <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
-        </form>
+                <input name="search_string" type="text" placeholder="Find a movie to review">
+                <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
+            </form>
         </div>
     </div>
     <div class="card index-card">
@@ -41,11 +41,10 @@
         </div>
         <div class="card-footer">
             <form action="{% url 'movie' id=1 is_movie=1 is_recent=0  %}" method="get">
-        <input name="search_string" type="text" placeholder="Find a review">
-        <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
-        </form>
+                <input name="search_string" type="text" placeholder="Find a review">
+                <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
+            </form>
         </div>
     </div>
 </div>
-    </div>
 {% endblock %}

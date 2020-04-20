@@ -1,11 +1,22 @@
+/*Fonts*/
+@font-face {
+    font-family: "NeonTubes";
+    src: url("../fonts/NeonTubes2.otf");
+}
+
 /*Body*/
 body, html {
     height: 100%;
+    padding: 0;
+}
+
+a, a:hover {
+    color: #FD0E55;
 }
 /* The hero image */
 .hero-image {
     /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    background-image: url("../../pictures/felix-mooneeram-evlkOfkQ5rE-unsplash (1).jpg");
+    background-image: url("../../pictures/myke-simon-atsUqIm3wxo-unsplash.jpg");
     /* Set a specific height */
     height: 50%;
     /* Position and center the image to scale nicely on all screens */
@@ -13,6 +24,8 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    margin-bottom: 2%;
+    opacity: .95;
 }
 
 /* Place text in the middle of the image */
@@ -24,31 +37,28 @@ body, html {
     transform: translate(-50%, -50%);
     color: white;
 }
-
-/*Navbar*/
-.navbar {
-    
+.moviephile_jumbo {
+    font-size: 72px;
+    font-family: NeonTubes;
+    font-weight: 500;
+    text-shadow: 5px 8px 2px #FCD1AD;
 }
 
-nav {
-    background-color: #4F5165;
+/*Navbar*/
+
+.navbarcontainer {
+    background: rgba(140,88,117, .5);
+    background: linear-gradient(90deg, rgba(140,88,117,.8) 23%, rgba(181,88,121,.8) 49%, rgba(247,99,145,.8) 90%);
+}
+.navbar {
+    max-height: 50px;
 }
 
 .nav-item {
-    color: #E3E4DB;
-    padding: 0 8px 0 8px;
+    padding: 0 4px 0 4px;
 }
 
-.navbar-brand {
-    color: #E3E4DB !important;
-}
-
-.nav-link {
-    vertical-align: bottom !important;
-    text-align:start;
-}
-
-.nav-link {
+.navbar-brand, .nav-link {
     color: #E3E4DB !important;
 }
 /*Index*/
