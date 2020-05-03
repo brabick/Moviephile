@@ -23,6 +23,9 @@
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <form action="{% url 'search_results' %}" method="get" >
+                <input name="search_string" type="text" placeholder="Find a movie to review" class="search" required minlength="2">
+            </form>
 
         </div>
         <div class="navbar">

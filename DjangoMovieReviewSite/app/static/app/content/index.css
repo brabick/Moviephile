@@ -54,6 +54,12 @@ a, a:hover {
 }
 
 /*Navbar*/
+.search {
+    margin: 2% 0 0 0;
+}
+.navbar-header {
+    display: inline-flex;
+}
 
 .navbarcontainer {
     background: rgba(140,88,117, .5);
@@ -70,8 +76,9 @@ a, a:hover {
 .navbar-brand, .nav-link {
     color: #E3E4DB !important;
 }
+
 /*Index*/
-.review_cards {
+.review-cards {
     padding: 0;
     display: inline-flex;
 }
@@ -99,12 +106,6 @@ h2.cat-descriptions {
     max-width: 50%;
 }
 
-.main_button {
-    border: none;
-    height: 34px;
-    padding: 5px;
-}
-
 .index-card-header {
     background-color: #E3E4DB;
 }
@@ -120,9 +121,7 @@ h2.cat-descriptions {
 #theater {
     max-width:800px;
 }
-.search {
-    margin: 0 0 10px 10px;
-}
+
 /*Movie*/
 th, td {
     border-bottom: 1px solid #ddd;
