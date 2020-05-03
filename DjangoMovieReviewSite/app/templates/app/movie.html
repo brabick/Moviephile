@@ -24,11 +24,11 @@
     {{movie_a.title}}
     </a></td>
     <td>{{movie_a.total}}</td>
-    <td><a href="{% url 'movie' id=movie_a.user.id is_movie=0 is_recent=0 %}">{{movie_a.user.username}}</a></td>
+    <td><a href="{% url 'movie' id=movie_a.user.id is_recent=0 %}">{{movie_a.user.username}}</a></td>
     </tr>
     {% endfor %}
 </table>
 <hr />
-<p>Use this area to provide additional information.</p>
+<p>Some of these reviews are better than others...</p>
 {% endif %}
 {% endblock %}

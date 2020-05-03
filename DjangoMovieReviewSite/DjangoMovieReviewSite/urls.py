@@ -18,12 +18,13 @@ from django.urls import include, path
 
 urlpatterns = [
     # Examples:
-    url(r'^$', app.views.home, name='home'),
-    url(r'^contact$', app.views.contact, name='contact'),
-    url(r'^about$', app.views.about, name='about'),
-    path('movie/<str:id>/<int:is_movie>/<int:is_recent>', app.views.movie, name='movie'),
-    url(r'^signup/$', app.views.signup, name='signup'),   
-    url(r'^login/$',
+    path('', app.views.home, name='home'),
+    path('home/<int:bad_search>', app.views.home, name='home'),
+    path('contact', app.views.contact, name='contact'),
+    path('about', app.views.about, name='about'),
+    path('movie/<str:id>/<int:is_recent>', app.views.movie, name='movie'),
+    path('signup', app.views.signup, name='signup'),   
+    path('login',
         django.contrib.auth.views.LoginView.as_view(),
         {
             'template_name': 'app/login.html',
@@ -35,7 +36,7 @@ urlpatterns = [
             }
         },
         name='login'),
-    url(r'^logout$',
+    path('logout',
         django.contrib.auth.views.LogoutView.as_view(),
         {
             'next_page': '/',
@@ -54,5 +55,5 @@ urlpatterns = urlpatterns + [
     path('accounts/', include('django.contrib.auth.urls')),
     path('search_results/', app.views.search_results, name='search_results'),
     path('add_review/<str:movie_id>/', app.views.add_review, name='add_review'),
-    url(r'^view_review/(?P<movie_score_id>\w+)/$', app.views.view_review, name='view_review'),
+    path('view_review/<int:movie_score_id>)/', app.views.view_review, name='view_review'),
 ]

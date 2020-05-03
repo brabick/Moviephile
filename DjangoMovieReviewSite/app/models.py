@@ -6,14 +6,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-# Create your models here.
-class tbl_movies(models.Model):
-    movie_id = models.AutoField(primary_key=True)
-    movie_title = models.CharField(max_length=80)
-    movie_genre = models.CharField(max_length=80)
-    movie_release_year = models.CharField(max_length=80)
-    movie_poster = models.ImageField(null=True)
-
 class tbl_movie_scores(models.Model):
     movie_score_id = models.AutoField(primary_key=True)
     movie_id = models.CharField(max_length=40, blank=True, null=True)
@@ -54,4 +46,6 @@ class tbl_movie_scores(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
-
+class tbl_category_desc(models.Model):
+     category = models.CharField(max_length=200, null=True)
+     description = models.TextField(blank=True, null=True)

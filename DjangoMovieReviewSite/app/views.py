@@ -4,7 +4,7 @@ Definition of views.
 
 from django.shortcuts import render, redirect
 from app import hidden_stuff
-from app.models import tbl_movies, tbl_movie_scores
+from app.models import tbl_movie_scores, tbl_category_desc
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
@@ -18,13 +18,18 @@ import requests
 from django.template import Library
 
 # Home page!  Nothing interesting right now
-def home(request):
+def home(request, bad_search='0'):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    if bad_search==1:
+        search='Something went wrong with the search, please try again.'
+    else:
+        search=''
     return render(request,
         'app/index.html',
         {
             'title':'Home Page',
+            'search':search,
             'year':datetime.now().year,
         },)
 
@@ -44,9 +49,11 @@ def contact(request):
 def about(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    desc = tbl_category_desc.objects.all()
     return render(request,
         'app/about.html',
-        {
+        {  
+            'desc': desc,
             'message':'Above are the ten most recent reviews! Click on a title to \
             see what made that movie so great.',
             'year':datetime.now().year,
@@ -74,25 +81,16 @@ def signup(request):
 # or
 # Show the 10 most recent reviews
 # This is call controlled on where the user clicks and searches
-def movie(request, id, is_movie, is_recent):
+def movie(request, id, is_recent):
     assert isinstance(request, HttpRequest)
     null_message = ''
-    if id == 1:
-        movie = 0
     # If we are just getting the recent movie reviews
     if is_recent == 1:
-        movie = tbl_movie_scores.objects.all()[:10]
+        movie = tbl_movie_scores.objects.all()[:20]
         header = "Recent Movie Reviews"
-        message = "Here are the 10 most recent movie reviews, is one of yours here?"
-    # If we are browsing reviews based off of a criteria
-    elif is_movie == 1:
-        query = request.GET.get('search_string')
-        movie = tbl_movie_scores.objects.filter(title__icontains=query)
-        header = "All Reviews with '" + query + "' in the title"
-        message = ''
-        null_message = "Uh... there's nothing here. Let's try this again."
+        message = "Here are the 20 most recent movie reviews, is one of yours here?"
     # If we are searching for reviews by a specific user
-    elif is_movie == 0:
+    else:
         movie = tbl_movie_scores.objects.filter(user=id)
         user = User.objects.get(id=id)
         header = "All Reviews by " + user.username
@@ -116,17 +114,32 @@ def search_results(request):
    # API request
    results = requests.get("http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
    results = results.json()
+   if results.get('Search') == "Incorrect IMDb ID.":
+       return redirect('home', bad_search=1)
    if 'Error' in results:
-       results = requests.get("http://www.omdbapi.com/?t=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
-       results = results.json()
+       error = results.get('Error')
+       if error == 'Incorrect IMDb ID.':
+            return redirect('home', bad_search=1)
+       elif error == 'Too many results.':
+            # It's a bit sketchy, but if we get too many results, we just go
+            # To the most popular result for what the person searched
+            # At least this way we won't get and error
+            results = requests.get("http://www.omdbapi.com/?t=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+            results = results.json()
+            return redirect('add_review', movie_id=results.get('imdbID'))
        
-       return redirect('add_review', movie_id=results.get('imdbID'))
    else:
        info = results['Search']
+       review_info = tbl_movie_scores.objects.filter(title__icontains=query)
+       movie_header = "Movies with '" + query + "' in the title"
+       review_header = "Reviews with '" + query + "' in the title"
        return render(request, 
            'app/search_results.html',
             {
             'movie_info': info,
+            'movie_header': movie_header,
+            'review_info': review_info,
+            'review_header': review_header,
             'null_message': 'There are no reviews for this movie, add one today!',
             'year':datetime.now().year,
             })
@@ -138,10 +151,13 @@ def search_results(request):
 @login_required
 def add_review(request, movie_id):
     assert isinstance(request, HttpRequest)
+    if movie_id == 'None':
+        return redirect('home', bad_search=1)
     movie = requests.get("http://www.omdbapi.com/?i=" + movie_id + "&plot=full&apikey=" + hidden_stuff.API_KEY)
     movie = movie.json()
     user = request.user
     add_review = 1
+    reviews = tbl_movie_scores.objects.filter(movie_id=movie_id)
     if request.method == 'POST':
         form = tbl_movie_scores_form(request.POST)
         if form.is_valid():
@@ -159,6 +175,7 @@ def add_review(request, movie_id):
             return render(request,
             'app/view_review.html',
             {
+            'reviews':reviews,
             'form':form,
             'movie_info': movie,
             'add_review': add_review,
@@ -170,6 +187,7 @@ def add_review(request, movie_id):
         return render(request,
             'app/view_review.html',
             {
+            'reviews':reviews,
             'form':form,
             'movie_info': movie,
             'add_review': add_review,
@@ -181,12 +199,14 @@ def view_review(request, movie_score_id):
     assert isinstance(request, HttpRequest)
     review = tbl_movie_scores.objects.get(pk=movie_score_id)
     id = review.movie_id
+    reviews = tbl_movie_scores.objects.filter(movie_id=id)
     movie = requests.get("http://www.omdbapi.com/?i=" + id + "&plot=full&apikey=" + hidden_stuff.API_KEY)
     movie = movie.json()
     add_review = 0
     return render(request,
         'app/view_review.html',
         {
+            'reviews':reviews,
             'movie_info': movie,
             'review_info':review,
             'add_review':add_review,
@@ -199,3 +219,8 @@ register = Library()
 @register.filter
 def get_range(value):
     return range(value)
+
+def page_not_found(request):
+    return render('404.html')
+def server_error(request):
+    return render('500.html')

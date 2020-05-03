@@ -71,7 +71,9 @@ Before Launch--
 *Chosen
 2.Tweak Index
 -Search cards with better spacing
+*Done
 -Fit everything within the same margins
+*Done
 -New Jumbotron
 *Done
 3.Search Pages
@@ -85,4 +87,9 @@ Before Launch--
 -Make it more interesting somehow
 5.Review pages
 -Complete overhaul of looks
+*Done
 6.All references to Moviephile
+*Done
+7. Search input control
+8. Make banner image size consistant
+*Done

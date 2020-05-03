@@ -16,35 +16,20 @@
     </p>
     <hr/>
 </div>
-
+<p id="bad-search">{{ search }}</p>
 <div class="container review_cards">
     <div class="card index-card">
         <div class="card-header index-card-header">
             <h4 class="index-card-header">Add a review!</h4>
         </div>
         <div class="card-body">
-            Use this form to find a movie to review. Search by the movie title (for now...)
+            Use this form to find a movie to review or a review for a movie!<br />
+            It's all sorted out, just trust me.
         </div>
-        <div class="card-footer">
-            <form action="{% url 'search_results' %}" method="get">
-                <input name="search_string" type="text" placeholder="Find a movie to review">
+            <form action="{% url 'search_results' %}" method="get" >
+                <input name="search_string" type="text" placeholder="Find a movie to review" class="search" required minlength="2">
                 <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
             </form>
-        </div>
-    </div>
-    <div class="card index-card">
-        <div class="card-header index-card-header">
-            <h4>Read a review!</h4>
-        </div>
-        <div class="card-body">
-            Use <i>this</i> form to find how people have scored your favorite movies!
-        </div>
-        <div class="card-footer">
-            <form action="{% url 'movie' id=1 is_movie=1 is_recent=0  %}" method="get">
-                <input name="search_string" type="text" placeholder="Find a review">
-                <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
-            </form>
-        </div>
     </div>
 </div>
 {% endblock %}

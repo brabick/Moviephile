@@ -1,4 +1,4 @@
-﻿{% extends "app/layout.html" %}
+{% extends "app/layout.html" %}
 
 {% block content %}
 <h1>{{ header }}</h1>
@@ -119,7 +119,45 @@
         <b>Plot:</b> {{movie_info.Plot}}
     </p>
 </div>
-
+<br />
+</div>
+<br />
+{% if reviews %}
+<br />
+<div class="container other-reviews">
+    <h4>Other reviews for {{review_info.title}}</h4>
+    <table id="review_results_table">
+        <tr>
+            <th>Title</th>
+            <th>Reviewed On</th>
+            <th>Total</th>
+            <th>User</th>
+        </tr>
+        {% for movie_review in reviews %}
+            <tr>
+                <td>
+                    <a href="{% url 'view_review' movie_score_id=movie_review.movie_score_id %}">
+                    {{movie_review.title}}
+                    </a>
+                </td>
+                <td>
+                    {{movie_review.created_at|date}}
+                </td>
+                <td>
+                     {{movie_review.total}}
+                </td>   
+                <td>
+                    <a href="{% url 'movie' id=movie_review.user_id is_recent=0 %}">
+                        {{movie_review.user}}
+                    </a>
+                </td> 
+            
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <h5>Nothing to see here, move along...</h5>
     </div>
+{% endif %}
 
 {% endblock %}

@@ -1,30 +1,68 @@
-﻿{% extends "app/layout.html" %}
+{% extends "app/layout.html" %}
 
 {% block content %}
 <h3>Results for... whatever you searched.</h3>
 {% if movie_info %}
 
-<p>Here are a few movies matching your search... you might need to refine it...</p>
+<h4>{{ movie_header }}</h4>
 
-<table>
+<table class="results_table">
     <tr>
         <th>Title</th>
         <th>Release Year</th>
-        
+        <th>Cast</th>        
     </tr>
-    {% for movie_a in movie_info %}
+    {% for movie_title in movie_info %}
         <tr>
+            <td class="col_1">
+                <a href="{% url 'add_review' movie_id=movie_title.imdbID  %}">
+                    {{movie_title.Title}}
+                </a>
             <td>
-                <a href="{% url 'add_review' movie_id=movie_a.imdbID  %}">
-            {{movie_a.Title}}
-                    </a>
-            <td>{{movie_a.Year}}</td>            
+                {{movie_title.Year}}
+            </td>
+            <td>{{movie_title.Cast}}
         </tr>
     {% endfor %}
-
 </table>
+<br />
+<h4>{{ review_header }}</h4>
+{% if review_info %}
+<table class="results_table">
+    <tr>
+        <th>Title</th>
+            <th>Reviewed On</th>
+            <th>Total</th>
+            <th>User</th>
+    </tr>
+    {% for movie_review in review_info %}
+        <tr>
+            <td>
+                <a href="{% url 'view_review' movie_score_id=movie_review.movie_score_id %}">
+                {{movie_review.title}}
+                </a>
+            </td>
+            <td>
+                    {{movie_review.created_at|date}}
+                </td>
+                <td>
+                     {{movie_review.total}}
+                </td>      
+            <td>
+                <a href="{% url 'movie' id=movie_review.user_id is_recent=0 %}">
+            {{movie_review.user}}
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <h5>Nothing to see here, move along...</h5>
+{% endif %}
+
 <h3>{{ message }}</h3>
 {% else %}
+<br />
 <h4>{{null_message}}</h4>
 {% endif %}
 

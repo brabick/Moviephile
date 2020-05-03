@@ -8,8 +8,17 @@
 body, html {
     height: 100%;
     padding: 0;
+    
 }
 
+html {
+    overflow-y: scroll;
+}
+button {
+    background-color: #FD0D56 !important;
+    outline: white !important;
+    color: white !important;
+}
 a, a:hover {
     color: #FD0E55;
 }
@@ -67,6 +76,11 @@ a, a:hover {
     display: inline-flex;
 }
 
+#bad-search {
+    color: red !important;
+    font-size: 12px !important;
+}
+
 ul.cat-descriptions {
     list-style: none;
 }
@@ -79,13 +93,16 @@ h2.cat-descriptions {
     background-color: #E3E4DB;
 }
 
-#moviephile {
-}
-
 .index-card {
     border-color: #3C4344;
     margin: 1%;
     max-width: 50%;
+}
+
+.main_button {
+    border: none;
+    height: 34px;
+    padding: 5px;
 }
 
 .index-card-header {
@@ -93,6 +110,7 @@ h2.cat-descriptions {
 }
 
 .index-card-header {
+    background-color: #FEFEFA;
 }
 
 #about-moviephile {
@@ -101,6 +119,9 @@ h2.cat-descriptions {
 
 #theater {
     max-width:800px;
+}
+.search {
+    margin: 0 0 10px 10px;
 }
 /*Movie*/
 th, td {
@@ -119,7 +140,21 @@ th {
     background-color: #CDCDCD;
 }
 
+.results_table {
+    width: 75%;
+}
+
+.col_1 {
+    width:71%;
+}
+
 /*Review*/
+#review_results_table th {
+    background-color: white;
+}
+#review_results_table {
+    max-width: 50%;
+}
 table.review_table td,
 table.review_table th {
     border: 1px solid #ddd;
@@ -159,4 +194,9 @@ table.review_table th{
 #n_b2 {
     border: solid white;
     border-left: 1px solid #ddd;
+}
+
+/*404 and 500*/
+#dog-doorway {
+    max-width: 256px;
 }
