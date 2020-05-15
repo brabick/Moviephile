@@ -22,7 +22,7 @@ urlpatterns = [
     path('home/<int:bad_search>', app.views.home, name='home'),
     path('contact', app.views.contact, name='contact'),
     path('about', app.views.about, name='about'),
-    path('movie/<str:id>/<int:is_recent>', app.views.movie, name='movie'),
+    path('movie/<str:id>/', app.views.movie, name='movie'),
     path('signup', app.views.signup, name='signup'),   
     path('login',
         django.contrib.auth.views.LoginView.as_view(),

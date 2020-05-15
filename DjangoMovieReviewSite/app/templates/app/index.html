@@ -7,7 +7,7 @@
     <p>
         We make no reservations about the fact that we <i>don't</i> know what we're talking about.
         This site is for the self-taught wannabe movie reviewer.
-        It's like you're friend that went to one wine tasting class and now pretends to like
+        It's like your friend that went to one wine tasting class and now pretends to like
         red wine even though everyone knows red wine is awful.
         So come in, take a seat, browse around. Below are a few different search options.
         You can search by movie title, or find reviews made by
@@ -17,19 +17,6 @@
     <hr/>
 </div>
 <p id="bad-search">{{ search }}</p>
-<div class="container review-cards">
-    <div class="card index-card">
-        <div class="card-header index-card-header">
-            <h4 class="index-card-header">Add a review!</h4>
-        </div>
-        <div class="card-body">
-            Use this form to find a movie to review or a review for a movie!<br />
-            It's all sorted out, just trust me.
-        </div>
-            <form action="{% url 'search_results' %}" method="get" >
-                <input name="search_string" type="text" placeholder="Find a movie to review" class="search" required minlength="2">
-                <button class="btn btn-outline-secondary main_button" type="submit">Submit</button>
-            </form>
-    </div>
-</div>
+{% include 'app/recent_reviews.html' %}
+
 {% endblock %}

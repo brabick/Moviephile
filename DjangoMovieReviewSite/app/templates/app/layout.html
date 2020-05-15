@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/index.css' %}"/>
     <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -23,15 +23,13 @@
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <form action="{% url 'search_results' %}" method="get" >
+            <form action="{% url 'search_results' %}" method="get" id="seachForm">
                 <input name="search_string" type="text" placeholder="Find a movie to review" class="search" required minlength="2">
             </form>
 
         </div>
         <div class="navbar">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url 'movie' id=1 is_recent=1 %}">Recent
-                    Reviews</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
 
@@ -56,7 +54,6 @@
     </footer>
 </div>
 
-<script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
 <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
 <script src="{% static 'app/scripts/respond.js' %}"></script>
 

@@ -49,7 +49,7 @@
                      {{movie_review.total}}
                 </td>      
             <td>
-                <a href="{% url 'movie' id=movie_review.user_id is_recent=0 %}">
+                <a href="{% url 'movie' id=movie_review.user_id %}">
             {{movie_review.user}}
                 </a>
             </td>

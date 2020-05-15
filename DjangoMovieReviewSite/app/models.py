@@ -45,6 +45,7 @@ class tbl_movie_scores(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    poster = models.CharField(max_length=200, null=True)
 
 class tbl_category_desc(models.Model):
      category = models.CharField(max_length=200, null=True)

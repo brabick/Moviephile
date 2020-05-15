@@ -55,7 +55,8 @@ a, a:hover {
 
 /*Navbar*/
 .search {
-    margin: 2% 0 0 0;
+    margin: 3% 0 0 0;
+    border: none;
 }
 .navbar-header {
     display: inline-flex;
@@ -78,11 +79,42 @@ a, a:hover {
 }
 
 /*Index*/
-.review-cards {
-    padding: 0;
+.carouselContents {
     display: inline-flex;
 }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  background-image: none;
+}
 
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: black;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: black;
+}
+.carouselInfo {
+    margin: 1% 0 5% 5%;
+}
+#carouselPoster {
+    width: 200px;
+    height: 300px;
+    margin: 4px;
+}
+#recentReviewsCarousel {
+    background-color: rgba(225, 225, 225, .3);
+    height: 312px;
+}
 #bad-search {
     color: red !important;
     font-size: 12px !important;
