@@ -1,0 +1,20 @@
+{% extends "app/layout.html" %}
+    {% block content %}
+    {% ifequal user.id user_info.id %}
+        <h2>Hello {{user_info.username}}</h2>
+        <h5>Don't worry, only you can see your sensitivo information</h5>
+        <p><b>Name:</b> {{ user_info.first_name }} {{ user_info.last_name}}</p>
+        <p><b>Email Address:</b> {{ user_info.email }}</p>
+        <p><b>Number of reviews:</b> {{reviews}}</p>
+        <p><b>Joined:</b> {{user_info.date_joined | date}}</p>
+    {% else %}
+        <h2>User {{user_info.username}}</h2>
+        <p><b>Number of reviews:</b> {{reviews}}</p>
+        <p><b>Joined:</b> {{user_info.date_joined | date}}</p>
+    {% endifequal%}
+    {% if movies %}
+        {% include "app/review_table_partial.html" %}
+    {% else %}
+        <h3>You haven't reviewed any movies yet!</h3>
+    {% endif %}
+{% endblock %}

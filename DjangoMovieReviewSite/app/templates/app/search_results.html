@@ -9,8 +9,7 @@
 <table class="results_table">
     <tr>
         <th>Title</th>
-        <th>Release Year</th>
-        <th>Cast</th>        
+        <th>Release Year</th>     
     </tr>
     {% for movie_title in movie_info %}
         <tr>
@@ -21,41 +20,13 @@
             <td>
                 {{movie_title.Year}}
             </td>
-            <td>{{movie_title.Cast}}
         </tr>
     {% endfor %}
 </table>
 <br />
 <h4>{{ review_header }}</h4>
-{% if review_info %}
-<table class="results_table">
-    <tr>
-        <th>Title</th>
-            <th>Reviewed On</th>
-            <th>Total</th>
-            <th>User</th>
-    </tr>
-    {% for movie_review in review_info %}
-        <tr>
-            <td>
-                <a href="{% url 'view_review' movie_score_id=movie_review.movie_score_id %}">
-                {{movie_review.title}}
-                </a>
-            </td>
-            <td>
-                    {{movie_review.created_at|date}}
-                </td>
-                <td>
-                     {{movie_review.total}}
-                </td>      
-            <td>
-                <a href="{% url 'movie' id=movie_review.user_id %}">
-            {{movie_review.user}}
-                </a>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
+{% if movies %}
+    {% include "app/review_table_partial.html" %}
 {% else %}
     <h5>Nothing to see here, move along...</h5>
 {% endif %}

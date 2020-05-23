@@ -85,11 +85,21 @@ Before Launch--
 4.About Page
 -Finish wall 'o text
 -Make it more interesting somehow
+*Done
 5.Review pages
 -Complete overhaul of looks
 *Done
 6.All references to Moviephile
 *Done
 7. Search input control
+*Done?
 8. Make banner image size consistant
 *Done
+Dropdown modal to inform of bad search
+
+User info page
+*Done
+Ability to edit user information
+Sorting columns
+Last 50(?) reviews
+Search Result Pagination

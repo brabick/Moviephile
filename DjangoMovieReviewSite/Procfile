@@ -1,0 +1,1 @@
+web: gunicorn DjangoMovieReviewSite.wsgi --log-file -

@@ -6,7 +6,6 @@
 <div class="container review_page">
 {% ifequal add_review 0 %}
     
-    
     <div class="col-md-8 review_tables">
 
 <table class="review_table">
@@ -154,7 +153,8 @@
         {% endfor %}
     </table>
 {% else %}
-    <h5>Nothing to see here, move along...</h5>
+    <br />
+    <h5>You will be the first person to review {{ movie_info.Title }}! Isn't that exciting?</h5>
     </div>
 {% endif %}
 

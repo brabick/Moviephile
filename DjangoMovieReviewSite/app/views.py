@@ -137,7 +137,7 @@ def search_results(request):
             {
             'movie_info': info,
             'movie_header': movie_header,
-            'review_info': review_info,
+            'movies': review_info,
             'review_header': review_header,
             'null_message': 'There are no reviews for this movie, add one today!',
             'year':datetime.now().year,
@@ -179,7 +179,8 @@ def add_review(request, movie_id):
             'form':form,
             'movie_info': movie,
             'add_review': add_review,
-            'header': movie.get('Title') + ', ' + movie.get('Year')
+            'header': movie.get('Title') + ', ' + movie.get('Year'),
+            'year':datetime.now().year,
             })
 
     else:
@@ -191,7 +192,8 @@ def add_review(request, movie_id):
             'form':form,
             'movie_info': movie,
             'add_review': add_review,
-            'header': movie.get('Title') + ', ' + movie.get('Year')
+            'header': movie.get('Title') + ', ' + movie.get('Year'),
+            'year':datetime.now().year,
             })
 
 # View for viewing a review!
@@ -211,9 +213,39 @@ def view_review(request, movie_score_id):
             'review_info':review,
             'add_review':add_review,
             'total': range(review.total),
-            'header': 'Review for ' + movie.get('Title')
+            'header': 'Review for ' + movie.get('Title'),
+            'year':datetime.now().year,
         })
 
+@login_required
+def user(request, user_id):
+    assert isinstance(request, HttpRequest)
+    review_info = tbl_movie_scores.objects.filter(user=user_id)
+    review_count = review_info.count()
+    user_info = User.objects.get(id=user_id)
+    current_user = request.user
+    #if user_id != current_user.id:
+    return render(request,
+    'app/user.html',
+    {
+        'movies':review_info,
+        'reviews':review_count,
+        'user_info':user_info,
+        'year':datetime.now().year,
+    })
+
+def reviews(request):
+    assert isinstance(request, HttpRequest)
+    reviews = tbl_movie_scores.objects.all()
+    reviews_count = reviews.count()
+    if reviews_count > 50:
+        reviews_count = 50
+    return render(request,
+    'app/reviews.html',
+    {
+        'movies':reviews[:reviews_count],
+        'year':datetime.now().year,
+    })
 
 def page_not_found(request):
     return render('404.html')

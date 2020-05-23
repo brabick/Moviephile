@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Total</th>
+        <th>Reviewed On</th>
+        <th>User</th>
+    </tr>
+    {% for movie_a in movies %}
+    <tr>
+    <td><a href="{% url 'view_review' movie_score_id=movie_a.movie_score_id %}">
+    {{movie_a.title}}
+    </a></td>
+    <td>{{movie_a.total}}</td>
+    <td>{{movie_a.created_at|date}}
+    <td><a href="{% url 'user' user_id=movie_a.user.id %}">{{movie_a.user.username}}</a></td>
+    </tr>
+    {% endfor %}
+</table>

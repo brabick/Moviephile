@@ -55,5 +55,7 @@ urlpatterns = urlpatterns + [
     path('accounts/', include('django.contrib.auth.urls')),
     path('search_results/', app.views.search_results, name='search_results'),
     path('add_review/<str:movie_id>/', app.views.add_review, name='add_review'),
-    path('view_review/<int:movie_score_id>)/', app.views.view_review, name='view_review'),
+    path('view_review/<int:movie_score_id>/', app.views.view_review, name='view_review'),
+    path('user/<int:user_id>/', app.views.user, name="user"),
+    path('reviews/', app.views.reviews, name="reviews")
 ]
