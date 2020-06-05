@@ -15,9 +15,14 @@
         <br/>
     </p>
     <hr/>
-</div>
+</div id="recents_table">
 <p id="bad-search">{{ search }}</p>
+<div>
 {% include 'app/recent_reviews_partial.html' %}
+</div>
+<div id="mobile_recents">
+{% include 'app/mobile_recent_reviews.html'%}
+</div>
 
 
 {% endblock %}

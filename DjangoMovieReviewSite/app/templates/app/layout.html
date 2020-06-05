@@ -13,29 +13,24 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand navbar-light fixed-top navbarcontainer">
+<nav class="navbar navbar-expand-md navbar-light fixed-top navbarcontainer">
     <div class="container">
         <div class="navbar-header">
             <a href="/" class="navbar-brand">Moviephile</a>
-            <button type="button" class="navbar-toggler btn" data-toggle="collapse" data-target=".navbar-collapse"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-icon"></span>
+            <button id="navbar-toggling" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTarget" aria-controls="navbarTarget" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <form action="{% url 'search_results' %}" method="get" id="seachForm">
-                <input name="search_string" type="text" placeholder="Find a movie to review" class="search" required minlength="2">
-            </form>
-
         </div>
-        <div class="navbar">
+        <div class="collapse navbar-collapse" id="navbarTarget">
             <ul class="navbar-nav mr-auto">
+            <li><form action="{% url 'search_results' %}" method="get" id="seachForm">
+                <input name="search_string" type="text" placeholder="Find a movie to review" class="search" required minlength="2">
+            </form></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'reviews' %}">Reviews</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
             </ul>
             {% include 'app/loginpartial.html' %}
-
         </div>
     </div>
 </nav>
@@ -61,3 +56,4 @@
 
 </body>
 </html>
+
