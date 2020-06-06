@@ -47,13 +47,17 @@ a, a:hover {
     color: white;
 }
 .moviephile_jumbo {
-    font-size: 72px;
+    font-size: 68px;
     font-family: NeonTubes;
     font-weight: 500;
     text-shadow: 5px 8px 2px #FCD1AD;
 }
 
 /*Navbar*/
+#navbar-toggling {
+    background-color: rgba(0,0,0,0) !important;
+}
+
 .search {
     margin: 3% 0 0 0;
     border: none;
@@ -66,9 +70,7 @@ a, a:hover {
     background: rgba(140,88,117, .5);
     background: linear-gradient(90deg, rgba(140,88,117,.8) 23%, rgba(181,88,121,.8) 49%, rgba(247,99,145,.8) 90%);
 }
-.navbar {
-    max-height: 50px;
-}
+
 
 .nav-item {
     padding: 0 4px 0 4px;
@@ -79,6 +81,13 @@ a, a:hover {
 }
 
 /*Index*/
+#mobile_recents{
+    display:none;
+}
+#mobile_poster {
+    max-height: 144px;
+    max-width: 96px;
+}
 .carouselContents {
     display: inline-flex;
 }
@@ -230,4 +239,13 @@ table.review_table th{
 /*404 and 500*/
 #dog-doorway {
     max-width: 256px;
+}
+
+@media screen and (max-width: 1026px) {
+    #recentReviewsCarousel {
+        display: none;
+    }
+    #mobile_recents{
+        display: inline;
+    }
 }

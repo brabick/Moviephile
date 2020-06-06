@@ -47,7 +47,7 @@ a, a:hover {
     color: white;
 }
 .moviephile_jumbo {
-    font-size: 72px;
+    font-size: 68px;
     font-family: NeonTubes;
     font-weight: 500;
     text-shadow: 5px 8px 2px #FCD1AD;
@@ -81,8 +81,12 @@ a, a:hover {
 }
 
 /*Index*/
+#mobile_recents{
+    display:none;
+}
 #mobile_poster {
-    max-height: 80px;
+    max-height: 144px;
+    max-width: 96px;
 }
 .carouselContents {
     display: inline-flex;
@@ -237,8 +241,17 @@ table.review_table th{
     max-width: 256px;
 }
 
-@media screen and (max-width: 700px) {
-    #recents_table {
+@media screen and (max-width: 1026px) {
+    #recentReviewsCarousel {
         display: none;
+    }
+    #mobile_recents{
+        display: inline;
+    }
+    .review_page {
+        display:block;
+    }
+    #id_review {
+        width: 100%;
     }
 }

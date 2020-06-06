@@ -14,6 +14,7 @@ import os
 import posixpath
 from .key import the_secret_key
 import socket
+import django_heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -136,3 +137,4 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+django_heroku.settings(locals())

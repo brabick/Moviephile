@@ -1,7 +1,7 @@
 <table>
     {% for movie_a in movies %}
     <tr>
-        <td><img id="mobile_poster" src={{movie_a.poster}} />
+        <td><a href="{% url 'add_review' movie_id=movie_a.movie_id %}"> <img id="mobile_poster" src={{movie_a.poster}} />
         <td><a href="{% url 'view_review' movie_score_id=movie_a.movie_score_id %}">
         {{movie_a.title}}
         </a><br />
