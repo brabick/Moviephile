@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 import requests
 from django import template
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 # Home page!  Nothing interesting right now
 def home(request, bad_search='0'):
@@ -37,7 +38,7 @@ def home(request, bad_search='0'):
             'title':'Home Page',
             'search':search,
             'year':datetime.now().year,
-            'total':ranges
+            'total':ranges,
         },)
 
 # Same as home page
@@ -109,12 +110,16 @@ def movie(request, id):
 # A page.  The has clickable links to go to reviews of that movie
 def search_results(request):
    assert isinstance(request, HttpRequest)
-   query = request.GET.get('search_string') 
+   query = request.GET.get('search_string')
+   query = query.strip() 
    # API request
    results = requests.get("http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
    results = results.json()
+   message=''
    if results.get('Search') == "Incorrect IMDb ID.":
-       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+       return HttpResponseRedirect(request.META.get('HTTP_REFERER'), messages.info(request, 'Something went horribly wrong'))
+   if results.get('Response') == 'False':
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'), messages.info(request, 'Your search failed, how about we try again?'))
    if 'Error' in results:
        error = results.get('Error')
        if error == 'Incorrect IMDb ID.':
@@ -220,6 +225,8 @@ def view_review(request, movie_score_id):
 @login_required
 def user(request, user_id):
     assert isinstance(request, HttpRequest)
+    if not User.objects.filter(id=user_id).exists():
+        return redirect('user', request.user.id)
     review_info = tbl_movie_scores.objects.filter(user=user_id)
     review_count = review_info.count()
     user_info = User.objects.get(id=user_id)

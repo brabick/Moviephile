@@ -241,6 +241,15 @@ table.review_table th{
     max-width: 256px;
 }
 
+/*Alerts*/
+#alert_window {
+    max-width: 60% !important;
+    background-color: rgba(253,14,108, .7);
+}
+#close_button {
+    background-color: rgb(253,14,108) !important;
+}
+
 @media screen and (max-width: 1026px) {
     #recentReviewsCarousel {
         display: none;
