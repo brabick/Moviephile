@@ -23,6 +23,15 @@
         </tr>
     {% endfor %}
 </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    {% for page in pages %}
+        <li class="page-item"><a class="page-link" href="{% url 'search_results' page=page %}">{{page|add:"1"}}</a></li>
+    {% endfor %}
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 <br />
 <h4>{{ review_header }}</h4>
 {% if movies %}

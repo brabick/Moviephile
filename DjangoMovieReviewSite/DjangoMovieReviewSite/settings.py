@@ -56,6 +56,8 @@ MIDDLEWARE = [
 
 ]
 
+SESSION_COOKIE_SECURE = True
+
 ROOT_URLCONF = 'DjangoMovieReviewSite.urls'
 
 TEMPLATES = [

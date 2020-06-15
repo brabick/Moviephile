@@ -23,7 +23,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarTarget">
             <ul class="navbar-nav mr-auto">
-            <li><form action="{% url 'search_results' %}" method="get" id="seachForm">
+            <li><form action="{% url 'search_results' page='1' %}" method="get" id="seachForm">
                 <input name="search_string" type="text" placeholder="Find a movie to review" class="search" required minlength="2">
             </form></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'reviews' %}">Reviews</a></li>

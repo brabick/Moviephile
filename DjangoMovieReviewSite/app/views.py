@@ -108,12 +108,13 @@ def movie(request, id):
         })
 # Makes a request to the OMDb API and plops the search results into
 # A page.  The has clickable links to go to reviews of that movie
-def search_results(request):
+def search_results(request, page='1'):
    assert isinstance(request, HttpRequest)
    query = request.GET.get('search_string')
-   query = query.strip() 
+   query = query.strip()
+   page = str(page)
    # API request
-   results = requests.get("http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+   results = requests.get("http://www.omdbapi.com/?s=" + query + "&page=" + page + "&type=movie&apikey=" + hidden_stuff.API_KEY)
    results = results.json()
    message=''
    if results.get('Search') == "Incorrect IMDb ID.":
@@ -131,9 +132,20 @@ def search_results(request):
             results = requests.get("http://www.omdbapi.com/?t=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
             results = results.json()
             return redirect('add_review', movie_id=results.get('imdbID'))
-       
+      
    else:
-       info = results['Search']
+       num_results = int(results.get('totalResults'))
+       if num_results > 10:
+           num_results = num_results / 10
+           page_num = round(num_results)
+           page_str = str(page_num)
+           results = requests.get("http://www.omdbapi.com/?s=" + query + "&page=" + page_str + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+           results = results.json()
+           info = results['Search']
+           if page_num >= 5:
+               page_num = 5
+       else:
+           info = results['Search']
        review_info = tbl_movie_scores.objects.filter(title__icontains=query)
        movie_header = "Movies with '" + query + "' in the title"
        review_header = "Reviews with '" + query + "' in the title"
@@ -146,6 +158,7 @@ def search_results(request):
             'review_header': review_header,
             'null_message': 'There are no reviews for this movie, add one today!',
             'year':datetime.now().year,
+            'pages':range(int(page_num))
             })
 
 
