@@ -50,3 +50,8 @@ class tbl_movie_scores(models.Model):
 class tbl_category_desc(models.Model):
      category = models.CharField(max_length=200, null=True)
      description = models.TextField(blank=True, null=True)
+
+class tbl_user_last_search(models.Model):
+        session_key = models.CharField(max_length=200, null=True)
+        last_search = models.CharField(max_length=200, null=True)
+        updated_at = models.DateTimeField(auto_now=True, null=True)

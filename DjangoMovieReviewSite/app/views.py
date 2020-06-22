@@ -4,8 +4,8 @@ Definition of views.
 
 from django.shortcuts import render, redirect
 from app import hidden_stuff
-from app.models import tbl_movie_scores, tbl_category_desc
-from django.http import HttpRequest
+from app.models import tbl_movie_scores, tbl_category_desc, tbl_user_last_search
+from django.http import HttpRequest, HttpResponse
 from django.template import RequestContext
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
@@ -18,6 +18,7 @@ import requests
 from django import template
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+
 
 # Home page!  Nothing interesting right now
 def home(request, bad_search='0'):
@@ -108,10 +109,14 @@ def movie(request, id):
         })
 # Makes a request to the OMDb API and plops the search results into
 # A page.  The has clickable links to go to reviews of that movie
-def search_results(request, page='1'):
+def search_results(request, page):
    assert isinstance(request, HttpRequest)
-   query = request.GET.get('search_string')
-   query = query.strip()
+   # retrive the search string   
+   query = request.GET.get('search_string')        
+   if query == None:
+       query = request.COOKIES.get('last_search')
+   else:
+       query = query.strip()
    page = str(page)
    # API request
    results = requests.get("http://www.omdbapi.com/?s=" + query + "&page=" + page + "&type=movie&apikey=" + hidden_stuff.API_KEY)
@@ -129,7 +134,7 @@ def search_results(request, page='1'):
             # It's a bit sketchy, but if we get too many results, we just go
             # To the most popular result for what the person searched
             # At least this way we won't get and error
-            results = requests.get("http://www.omdbapi.com/?t=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+            results = requests.get("http://www.omdbapi.com/?t=" + query + "&page=" + page + "&type=movie&apikey=" + hidden_stuff.API_KEY)
             results = results.json()
             return redirect('add_review', movie_id=results.get('imdbID'))
       
@@ -139,17 +144,17 @@ def search_results(request, page='1'):
            num_results = num_results / 10
            page_num = round(num_results)
            page_str = str(page_num)
-           results = requests.get("http://www.omdbapi.com/?s=" + query + "&page=" + page_str + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+           results = requests.get("http://www.omdbapi.com/?s=" + query + "&page=" + page + "&type=movie&apikey=" + hidden_stuff.API_KEY)
            results = results.json()
            info = results['Search']
-           if page_num >= 5:
-               page_num = 5
+           if page_num >= 6:
+               page_num = 6
        else:
            info = results['Search']
        review_info = tbl_movie_scores.objects.filter(title__icontains=query)
        movie_header = "Movies with '" + query + "' in the title"
        review_header = "Reviews with '" + query + "' in the title"
-       return render(request, 
+       response = render(request, 
            'app/search_results.html',
             {
             'movie_info': info,
@@ -158,8 +163,10 @@ def search_results(request, page='1'):
             'review_header': review_header,
             'null_message': 'There are no reviews for this movie, add one today!',
             'year':datetime.now().year,
-            'pages':range(int(page_num))
+            'pages':range(1, int(page_num))
             })
+       response.set_cookie('last_search', query)
+       return response
 
 
 # You gotta be in to create a review.  Accesses the form created to add the
@@ -218,6 +225,7 @@ def add_review(request, movie_id):
 def view_review(request, movie_score_id):
     assert isinstance(request, HttpRequest)
     review = tbl_movie_scores.objects.get(pk=movie_score_id)
+    descs = tbl_category_desc.objects.all()
     id = review.movie_id
     reviews = tbl_movie_scores.objects.filter(movie_id=id)
     movie = requests.get("http://www.omdbapi.com/?i=" + id + "&plot=full&apikey=" + hidden_stuff.API_KEY)
@@ -232,6 +240,7 @@ def view_review(request, movie_score_id):
             'add_review':add_review,
             'total': range(review.total),
             'header': 'Review for ' + movie.get('Title'),
+            'description': descs,
             'year':datetime.now().year,
         })
 
@@ -266,6 +275,8 @@ def reviews(request):
         'movies':reviews[:reviews_count],
         'year':datetime.now().year,
     })
+
+
 
 def page_not_found(request):
     return render('404.html')

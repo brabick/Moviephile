@@ -14,6 +14,9 @@ import os
 import posixpath
 from .key import the_secret_key
 import socket
+import django_heroku
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+SESSION_ENGINE ="django.contrib.sessions.backends.signed_cookies"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,7 +61,7 @@ MIDDLEWARE = [
 
 ]
 
-SESSION_COOKIE_SECURE = True
+SESSION_SAVE_EVERY_REQUEST = True
 
 ROOT_URLCONF = 'DjangoMovieReviewSite.urls'
 
@@ -136,3 +141,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+django_heroku.settings(locals())

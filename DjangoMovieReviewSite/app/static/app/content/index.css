@@ -62,6 +62,7 @@ a, a:hover {
     margin: 3% 0 0 0;
     border: none;
 }
+
 .navbar-header {
     display: inline-flex;
 }
@@ -189,6 +190,21 @@ th {
 }
 
 /*Review*/
+.popover_header {
+    background-color: rgb(242,242,242) !important;
+    color: black !important;
+    border: none;
+}
+
+.popover_header:hover {
+    cursor: context-menu;
+}
+
+.popover_header:focus, .popover_header:focus:active {
+    outline: none;
+    box-shadow: none;
+}
+
 #review_results_table th {
     background-color: white;
 }
@@ -236,6 +252,14 @@ table.review_table th{
     border-left: 1px solid #ddd;
 }
 
+.page-link {
+    color: #FD0D56;
+}
+#page-item {
+    color: white !important;
+}
+
+
 /*404 and 500*/
 #dog-doorway {
     max-width: 256px;
@@ -262,5 +286,11 @@ table.review_table th{
     }
     #id_review {
         width: 100%;
+    }
+    .search {
+        width: 80%;
+    }
+    #searchForm {
+        max-width: 45%;
     }
 }
