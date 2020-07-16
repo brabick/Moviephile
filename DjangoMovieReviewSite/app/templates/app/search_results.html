@@ -6,11 +6,14 @@
 
 <h4>{{ movie_header }}</h4>
 
-<table class="results_table">
+<table id="review_table_partial" class="results_table tablesorter">
+    <thead>
     <tr>
         <th>Title</th>
         <th>Release Year</th>     
     </tr>
+    </thead>
+    <tbody>
     {% for movie_title in movie_info %}
         <tr>
             <td class="col_1">
@@ -21,6 +24,7 @@
                 {{movie_title.Year}}
             </td>
         </tr>
+    </tbody>
     {% endfor %}
 </table>
 <nav aria-label="Pagination">
