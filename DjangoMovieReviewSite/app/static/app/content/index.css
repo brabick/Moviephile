@@ -68,8 +68,8 @@ a, a:hover {
 }
 
 .navbarcontainer {
-    background: rgba(140,88,117, .5);
-    background: linear-gradient(90deg, rgba(140,88,117,.8) 23%, rgba(181,88,121,.8) 49%, rgba(247,99,145,.8) 90%);
+    background: rgb(140,88,117);
+    background: linear-gradient(90deg, rgb(140,88,117) 23%, rgb(191,98,131) 62%, rgb(247,99,145) 90%);
 }
 
 
