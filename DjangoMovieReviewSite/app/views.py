@@ -151,6 +151,7 @@ def search_results(request, page):
                page_num = 6
        else:
            info = results['Search']
+           page_num = 0
        review_info = tbl_movie_scores.objects.filter(title__icontains=query)
        movie_header = "Movies with '" + query + "' in the title"
        review_header = "Reviews with '" + query + "' in the title"
