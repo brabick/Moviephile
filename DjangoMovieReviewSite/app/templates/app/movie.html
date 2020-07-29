@@ -3,17 +3,17 @@
 {% block content %}
 <h1>{{ header }}</h1>
 <h3>{{ message }}</h3>
-<hr />
+<hr/>
 
 {% if not movies %}
 <h4>{{null_message}}</h4>
 <form action="{% url 'search_results' %}" method="get">
-        <input name="search_string" type="text" placeholder="Find a movie to review">
-        <button type="submit">Submit</button>
-        </form>
+    <input name="search_string" type="text" placeholder="Find a movie to review">
+    <button type="submit">Submit</button>
+</form>
 {% else %}
 {% include "app/review_table_partial.html" %}
-<hr />
+<hr/>
 
 {% endif %}
 {% endblock %}

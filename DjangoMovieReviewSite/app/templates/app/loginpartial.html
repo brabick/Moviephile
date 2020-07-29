@@ -2,15 +2,16 @@
 <form id="logoutForm" action="/logout" method="post" class="navbar-right nav-item">
     {% csrf_token %}
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item"> <a class="nav-link" href={% url 'user' user_id=user.id%}>{{ user.username }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li class="nav-item"><a class="nav-link" href={% url 'user' user_id=user.id%}>{{ user.username }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log
+            off</a></li>
     </ul>
 </form>
 
 {% else %}
 
 <ul class="navbar-nav navbar-right">
-    <li class="nav-item"><a class="nav-link"href="{% url 'login' %}">Log in or sign up</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log in or sign up</a></li>
 </ul>
 
 {% endif %}
