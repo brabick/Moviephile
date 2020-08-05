@@ -10,6 +10,9 @@ body, html {
     padding: 0;
     
 }
+th {
+    cursor: pointer;
+}
 
 html {
     overflow-y: scroll;
