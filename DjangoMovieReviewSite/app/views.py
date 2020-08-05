@@ -141,30 +141,33 @@ def search_results(request, page):
 
    # Goes through the query list and makes a request for each item
    # If there are results in there, we add them to results['Search'], otherwise, who cares?
-   if len(query) == 1:
+   if 'totalResults' in results:
+       pages = round(int(results['totalResults']) / 10)
+   else:
+       pages = 0
+   if not isinstance(query, list):
        results = requests.get(
            "http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
        results = results.json()
+       get_all_page_results(pages, results, query)
    else:
        for q in query:
            r = requests.get(
                "http://www.omdbapi.com/?s=" + q + "&type=movie&apikey=" + hidden_stuff.API_KEY)
            r = r.json()
-           print(r)
            if 'Search' in r:
                for dict in r['Search']:
-                   results['Search'].append(dict)
+                   if dict not in results['Search']:
+                       results['Search'].append(dict)
+                   get_all_page_results(pages, results, q)
            else:
                continue
 
    if results.get('Response') == 'False':
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'), messages.info(request, 'Your search failed, how about we try again?'))
    else:
-       num_results = int(results.get('totalResults'))
-       if num_results < 50:
-           info = results['Search'][0:]
-       else:
-           info = results['Search'][0:50]
+       info = results['Search'][0:]
+
        review_info = tbl_movie_scores.objects.filter(title__icontains=query)
        response = render(request, 
            'app/search_results.html',
@@ -179,6 +182,22 @@ def search_results(request, page):
        response.set_cookie('last_search', query)
        return response
 
+def get_all_page_results(pages, results_set, query):
+    for p in range(int(pages)):
+        p = p + 1
+        p = str(p)
+        r = requests.get(
+            "http://www.omdbapi.com/?s=" + query + "&page=" + p + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+        r = r.json()
+        if 'Search' in r:
+            for res in r['Search']:
+                if res not in results_set['Search']:
+                    results_set['Search'].append(res)
+            if p == str(4):
+                break
+        else:
+            continue
+    return results_set
 
 # You gotta be in to create a review.  Accesses the form created to add the
 # review
