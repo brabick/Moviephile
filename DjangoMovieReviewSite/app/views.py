@@ -113,8 +113,9 @@ def search_results(request, page):
    # retrive the search string   
    query = request.GET.get('search_string')        
    query = query.strip()
-   movie_header = "Movies related to '" + query
-   review_header = "Reviews related to '" + query
+   movie_header = "Movies related to '" + query + "'"
+   review_header = "Reviews related to '" + query + "'"
+   review_info = tbl_movie_scores.objects.filter(title__icontains=query)
 
    # initial request
    results = requests.get(
@@ -167,8 +168,6 @@ def search_results(request, page):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'), messages.info(request, 'Your search failed, how about we try again?'))
    else:
        info = results['Search'][0:]
-
-       review_info = tbl_movie_scores.objects.filter(title__icontains=query)
        response = render(request, 
            'app/search_results.html',
             {
@@ -181,6 +180,7 @@ def search_results(request, page):
             })
        response.set_cookie('last_search', query)
        return response
+
 
 def get_all_page_results(pages, results_set, query):
     for p in range(int(pages)):
