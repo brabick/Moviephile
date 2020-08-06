@@ -15,6 +15,18 @@
     </thead>
     <tbody>
     {% for movie_title in movie_info %}
+<<<<<<< HEAD
+        <tr>
+            <td class="col_1">
+                <a href="{% url 'add_review' movie_id=movie_title.imdbID  %}">
+                    {{movie_title.Title}}
+                </a>
+            <td>
+                {{movie_title.Year}}
+            </td>
+        </tr>
+    </tbody>
+=======
     <tr>
         <td class="col_1">
             <a href="{% url 'add_review' movie_id=movie_title.imdbID  %}">
@@ -24,6 +36,7 @@
             {{movie_title.Year}}
         </td>
     </tr>
+>>>>>>> 168330935bed0d1115f48953a74e5dc1b0162d8a
     {% endfor %}
 </table>
 <nav aria-label="Pagination">

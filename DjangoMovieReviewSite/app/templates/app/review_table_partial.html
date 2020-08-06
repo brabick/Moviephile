@@ -1,10 +1,13 @@
-<table>
+<table id="review_table_partial" class="tablesorter">
+<thead>
     <tr>
         <th>Title</th>
         <th>Total</th>
         <th>Reviewed On</th>
         <th>User</th>
     </tr>
+</thead>
+<tbody>
     {% for movie_a in movies %}
     <tr>
         <td><a href="{% url 'view_review' movie_score_id=movie_a.movie_score_id %}">
@@ -15,4 +18,5 @@
         <td><a href="{% url 'user' user_id=movie_a.user.id %}">{{movie_a.user.username}}</a></td>
     </tr>
     {% endfor %}
+</tbody>
 </table>
