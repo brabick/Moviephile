@@ -181,7 +181,7 @@ def search_results(request, page):
        response.set_cookie('last_search', query)
        return response
 
-
+# Function to get all data from multiple pages
 def get_all_page_results(pages, results_set, query):
     for p in range(int(pages)):
         p = p + 1
