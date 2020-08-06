@@ -107,53 +107,67 @@ def movie(request, id):
             'null_message': null_message,
             'year':datetime.now().year,
         })
-# Makes a request to the OMDb API and plops the search results into
-# A page.  The has clickable links to go to reviews of that movie
+# Makes a request to the OMDb API and plops the search results into a list of at most 50 results
 def search_results(request, page):
    assert isinstance(request, HttpRequest)
    # retrive the search string   
    query = request.GET.get('search_string')        
-   if query == None:
-       query = request.COOKIES.get('last_search')
-   else:
-       query = query.strip()
-   page = str(page)
-   # API request
-   results = requests.get("http://www.omdbapi.com/?s=" + query + "&page=" + page + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+   query = query.strip()
+   movie_header = "Movies related to '" + query + "'"
+   review_header = "Reviews related to '" + query + "'"
+   review_info = tbl_movie_scores.objects.filter(title__icontains=query)
+
+   # initial request
+   results = requests.get(
+       "http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
    results = results.json()
-   message=''
-   if results.get('Search') == "Incorrect IMDb ID.":
-       return HttpResponseRedirect(request.META.get('HTTP_REFERER'), messages.info(request, 'Something went horribly wrong'))
+   # if there is a space in the search, we can guarantee results, even if the user does something weird
+   # Unless they just enter jibberish
+   # Here, we split the query into a list
+   if ' ' in query:
+       query = query.split(' ')
+   # if the user only gave us one word in the query, there isn't much we can do (for now)
+   # redirect with an error message
+   if results.get('Response') == 'False' and len(query) == 1:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'), messages.info(request, 'Your search failed, how about we try again?'))
+   # If the entered a couple of words, we can iterate through them and make a request for each one
+   # If one of them comes back with results, great! we replace the results variable with that search and keep going
+   elif isinstance(query, list) and len(query) > 1:
+       for q in query:
+           results = requests.get(
+               "http://www.omdbapi.com/?s=" + q + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+           results = results.json()
+           if 'Search' in results:
+               break
+
+   # Goes through the query list and makes a request for each item
+   # If there are results in there, we add them to results['Search'], otherwise, who cares?
+   if 'totalResults' in results:
+       pages = round(int(results['totalResults']) / 10)
+   else:
+       pages = 0
+   if not isinstance(query, list):
+       results = requests.get(
+           "http://www.omdbapi.com/?s=" + query + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+       results = results.json()
+       get_all_page_results(pages, results, query)
+   else:
+       for q in query:
+           r = requests.get(
+               "http://www.omdbapi.com/?s=" + q + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+           r = r.json()
+           if 'Search' in r:
+               for dict in r['Search']:
+                   if dict not in results['Search']:
+                       results['Search'].append(dict)
+                   get_all_page_results(pages, results, q)
+           else:
+               continue
+
    if results.get('Response') == 'False':
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'), messages.info(request, 'Your search failed, how about we try again?'))
-   if 'Error' in results:
-       error = results.get('Error')
-       if error == 'Incorrect IMDb ID.':
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-       elif error == 'Too many results.':
-            # It's a bit sketchy, but if we get too many results, we just go
-            # To the most popular result for what the person searched
-            # At least this way we won't get and error
-            results = requests.get("http://www.omdbapi.com/?t=" + query + "&page=" + page + "&type=movie&apikey=" + hidden_stuff.API_KEY)
-            results = results.json()
-            return redirect('add_review', movie_id=results.get('imdbID'))
-      
    else:
-       num_results = int(results.get('totalResults'))
-       if num_results > 10:
-           num_results = num_results / 10
-           page_num = round(num_results)
-           page_str = str(page_num)
-           results = requests.get("http://www.omdbapi.com/?s=" + query + "&page=" + page + "&type=movie&apikey=" + hidden_stuff.API_KEY)
-           results = results.json()
-           info = results['Search']
-           if page_num >= 6:
-               page_num = 6
-       else:
-           info = results['Search']
-       review_info = tbl_movie_scores.objects.filter(title__icontains=query)
-       movie_header = "Movies with '" + query + "' in the title"
-       review_header = "Reviews with '" + query + "' in the title"
+       info = results['Search'][0:]
        response = render(request, 
            'app/search_results.html',
             {
@@ -163,11 +177,27 @@ def search_results(request, page):
             'review_header': review_header,
             'null_message': 'There are no reviews for this movie, add one today!',
             'year':datetime.now().year,
-            'pages':range(1, int(page_num))
             })
        response.set_cookie('last_search', query)
        return response
 
+
+def get_all_page_results(pages, results_set, query):
+    for p in range(int(pages)):
+        p = p + 1
+        p = str(p)
+        r = requests.get(
+            "http://www.omdbapi.com/?s=" + query + "&page=" + p + "&type=movie&apikey=" + hidden_stuff.API_KEY)
+        r = r.json()
+        if 'Search' in r:
+            for res in r['Search']:
+                if res not in results_set['Search']:
+                    results_set['Search'].append(res)
+            if p == str(4):
+                break
+        else:
+            continue
+    return results_set
 
 # You gotta be in to create a review.  Accesses the form created to add the
 # review

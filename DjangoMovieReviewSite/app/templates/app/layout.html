@@ -21,9 +21,12 @@
         <div class="navbar-header">
             <a href="/" class="navbar-brand">Moviephile</a>
             <form action="{% url 'search_results' page='1' %}" method="get" id="searchForm">
-                <input name="search_string" type="text" placeholder="Review A Movie" class="search" required minlength="2">
+                <input name="search_string" type="text" placeholder="Review A Movie" class="search" required
+                       minlength="2">
             </form>
-            <button id="navbar-toggling" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTarget" aria-controls="navbarTarget" aria-expanded="false" aria-label="Toggle navigation">
+            <button id="navbar-toggling" class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarTarget" aria-controls="navbarTarget" aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -46,19 +49,19 @@
     </div>
 </div>
 <div class="container body-content">
-<!--Error Message Section. Please don't forget where this is-->
-{% if messages %}
-<div class="alert alert-dismissible fade show" id="alert_window" role="alert">
-    {% for message in messages %}
-    <b{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</b>
-    {% endfor %}
+    <!--Error Message Section. Please don't forget where this is-->
+    {% if messages %}
+    <div class="alert alert-dismissible fade show" id="alert_window" role="alert">
+        {% for message in messages %}
+        <b{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</b>
+        {% endfor %}
 
-  <button id="close_button" type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-{% endif %}
-<!--Error Message Section. Please don't forget where this is-->
+        <button id="close_button" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    <!--Error Message Section. Please don't forget where this is-->
     {% block content %}{% endblock %}
     <hr/>
     <footer>
@@ -69,6 +72,7 @@
 <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
 <script src="{% static 'app/scripts/respond.js' %}"></script>
 <script src="{% static 'app/scripts/popover.js'%}"></script>
+<script src="{% static 'app/scripts/tablesort.js' %}"></script>
 <script src="{% static 'app/scripts/bootstrap.bundle.min.js'%}"></script>
 {% block scripts %}{% endblock %}
 </body>

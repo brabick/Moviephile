@@ -1,41 +1,41 @@
 <h3>Here are some recent reviews to see what we are all about!</h3>
 
 <div id="recentReviewsCarousel" class="carousel slide carousel-fade" data-ride="carousel">
-  <div class="carousel-inner">
-    {% for movie_a in movies %}
-    <a href="{% url 'view_review' movie_score_id=movie_a.movie_score_id %}">
-    {% if forloop.first %}
-        <div class="carousel-item active" data-interval="10000">
-    {% else %}
-        <div class="carousel-item" data-interval="10000">
-    {% endif %}
-    <div class="container carouselContents">
-    <div class="image">
-      <img src="{{movie_a.poster}}" alt="{{movie_a.title}}" id="carouselPoster">
+    <div class="carousel-inner">
+        {% for movie_a in movies %}
+        <a href="{% url 'view_review' movie_score_id=movie_a.movie_score_id %}">
+            {% if forloop.first %}
+            <div class="carousel-item active" data-interval="10000">
+                {% else %}
+                <div class="carousel-item" data-interval="10000">
+                    {% endif %}
+                    <div class="container carouselContents">
+                        <div class="image">
+                            <img src="{{movie_a.poster}}" alt="{{movie_a.title}}" id="carouselPoster">
+                        </div>
+                        <div class="carouselInfo">
+                            <h3><u>Review for {{movie_a.title}}</u></h3>
+                            <h4>by <i>{{movie_a.user.username}}</i></h4>
+                            {% ifequal movie_a.review '' %}
+                            <p>It looks like they didn't have much to say...</p>
+                            {% else %}
+                            <p>{{movie_a.review|truncatewords:100}}</p>
+                            {% endifequal %}
+                            <b>{{movie_a.total}}/100</b>
+                        </div>
+                    </div>
+        </a>
     </div>
-    <div class="carouselInfo">
-        <h3><u>Review for {{movie_a.title}}</u></h3>
-        <h4>by <i>{{movie_a.user.username}}</i></h4>
-        {% ifequal movie_a.review '' %}
-        <p>It looks like they didn't have much to say...</p>
-        {% else %}
-        <p>{{movie_a.review|truncatewords:100}}</p>  
-        {% endifequal %}
-        <b>{{movie_a.total}}/100</b>
-    </div>  
-    </div>
-    </a>
-    </div>
-    
-        
+
+
     {% endfor %}
-  </div>
-  <a class="carousel-control-prev" href="#recentReviewsCarousel" role="button" data-slide="prev">
+</div>
+<a class="carousel-control-prev" href="#recentReviewsCarousel" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" id="arrow" href="#recentReviewsCarousel" role="button" data-slide="next">
+</a>
+<a class="carousel-control-next" id="arrow" href="#recentReviewsCarousel" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
-  </a>
+</a>
 </div>

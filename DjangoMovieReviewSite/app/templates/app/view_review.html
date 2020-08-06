@@ -3,280 +3,312 @@
 
 {% block content %}
 <h1>{{ header }}</h1>
-<hr />
+<hr/>
 <div class="container review_page">
-{% ifequal add_review 0 %}
-    
+    {% ifequal add_review 0 %}
+
     <div class="col-md-8 review_tables">
-<!--Table for viewing a review-->
-<table class="review_table">
-    <tr>
-          <td id="no_border" colspan="12"><h4>{{ review_info.total }} Thumbs Up!</h4>
-        {% for i in total %}
-            &#128077;
-        {% endfor %}</td>
-    </tr>
-    <tr></tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "1" "description" %}" data-html="true">
-  {% get_obj "1" "category" %}
-</label></th>
-        <td>{{review_info.sound}}</td>   
-    </tr>
-    <tr>
-        <th>
-    <label  class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "2" "description" %}" data-html="true">
-  {% get_obj "2" "category" %}
-</label></th>
-        <td>{{review_info.cinematography}}</td>
-    </tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "3" "description" %}" data-html="true">
-  {% get_obj "3" "category" %}
-</label></th>
-        <td>{{review_info.story_telling}}</td>
-    </tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "4" "description" %}" data-html="true">
-  {% get_obj "4" "category" %}
-</label></th>
-        <td>{{review_info.acting}}</td>
-    </tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "5" "description" %}" data-html="true">
-  {% get_obj "5" "category" %}
-</label></th>
-        <td>{{review_info.plausibility}}</td>
-    </tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "6" "description" %}" data-html="true">
-  {% get_obj "6" "category" %}
-</label></th>
-        <td>{{review_info.cast}}</td>
-    </tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "7" "description" %}" data-html="true">
-  {% get_obj "7" "category" %}
-</label></th>
-        <td>{{review_info.effects}}</td>
-    </tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "8" "description" %}" data-html="true">
-  {% get_obj "8" "category" %}
-</label></th>
-        <td>{{review_info.fun_factor}}</td>
-    </tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "9" "description" %}" data-html="true">
-  {% get_obj "9" "category" %}
-</label></th>
-        <td>{{review_info.originality}}</td>
-    </tr>
-    <tr>
-        <th>
-    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "10" "description" %}" data-html="true">
-  {% get_obj "10" "category" %}
-</label></th>
-        
-        <td>{{review_info.characters}}</td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        <td id="n_b2"></td>
-        
-
-
-    </tr>
-    <tr>
-        <td id="no_border" colspan="12">
-        {% if review_info.review %}
-
-        <h2>Review</h2>
-        <hr />
-        {{review_info.review}}
-        {% endif %}</td>
-    </tr>
-</table>
-<!--End table for viewing a review-->
-</div>
-{% endifequal %}
-{% ifequal add_review 1 %}
-<!--Table for creating a review-->
-<div class="col-md-6">
-<form action="" method="post">
-    {% csrf_token %}
-        <table class="d-lg-block review_table">
-        <tr>
-            <th>
-                Catagory
-            </th>
-            <td>
-                Score (out of 10)
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "1" "description" %}" data-html="true">
-                    {% get_obj "1" "category" %}
-                </label>
-            </th>
-                <td>
-                    {{form.sound}}
+        <!--Table for viewing a review-->
+        <table class="review_table">
+            <tr>
+                <td id="no_border" colspan="12"><h4>{{ review_info.total }} Thumbs Up!</h4>
+                    {% for i in total %}
+                    &#128077;
+                    {% endfor %}
                 </td>
             </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "2" "description" %}" data-html="true">
+            <tr></tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 1" "description" %}" data-html="true">
+                    {% get_obj "1" "category" %}
+                    </label></th>
+                <td>{{review_info.sound}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 2" "description" %}" data-html="true">
                     {% get_obj "2" "category" %}
-                </label>
-            </th>
-        
-            <td>
-                {{form.cinematography}}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "3" "description" %}" data-html="true">
+                    </label></th>
+                <td>{{review_info.cinematography}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 3" "description" %}" data-html="true">
                     {% get_obj "3" "category" %}
-                </label>
-            </th>
-        
-            <td>
-                {{form.story_telling}}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "4" "description" %}" data-html="true">
+                    </label></th>
+                <td>{{review_info.story_telling}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 4" "description" %}" data-html="true">
                     {% get_obj "4" "category" %}
-                </label>
-            </th>
-        
-            <td>
-                {{form.acting}}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "5" "description" %}" data-html="true">
+                    </label></th>
+                <td>{{review_info.acting}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 5" "description" %}" data-html="true">
                     {% get_obj "5" "category" %}
-                </label>
-            </th>
-                <td>
-                    {{form.plausibility}}
-                </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "6" "description" %}" data-html="true">
+                    </label></th>
+                <td>{{review_info.plausibility}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 6" "description" %}" data-html="true">
                     {% get_obj "6" "category" %}
-                </label>
-            </th>
-            <td>
-                {{form.cast}}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "7" "description" %}" data-html="true">
+                    </label></th>
+                <td>{{review_info.cast}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 7" "description" %}" data-html="true">
                     {% get_obj "7" "category" %}
-                </label>
-            </th>
-            <td>
-                {{form.effects}}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "8" "description" %}" data-html="true">
+                    </label></th>
+                <td>{{review_info.effects}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 8" "description" %}" data-html="true">
                     {% get_obj "8" "category" %}
-                </label>
-            </th>
-            <td>
-                {{form.fun_factor}}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "9" "description" %}" data-html="true">
+                    </label></th>
+                <td>{{review_info.fun_factor}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 9" "description" %}" data-html="true">
                     {% get_obj "9" "category" %}
-                </label>
-            </th>
-            <td>
-                {{form.originality}}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover" data-placement="top" data-content="{% get_obj "10" "description" %}" data-html="true">
+                    </label></th>
+                <td>{{review_info.originality}}</td>
+            </tr>
+            <tr>
+                <th>
+                    <label class="popover_header" data-container="body" data-toggle="popover" data-trigger="focus hover"
+                           data-placement="top" data-content="{% get_obj " 10" "description" %}" data-html="true">
                     {% get_obj "10" "category" %}
-                </label>
-            </th>        
-            <td>
-                {{form.characters}}
-            </td>
-        </tr>
-        <tr>
-            <th>
-                Review
-            </th>
-            <td>
-                {{form.review}}
-            </td>
-        </tr>
+                    </label></th>
+
+                <td>{{review_info.characters}}</td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+                <td id="n_b2"></td>
+
+
+            </tr>
+            <tr>
+                <td id="no_border" colspan="12">
+                    {% if review_info.review %}
+
+                    <h2>Review</h2>
+                    <hr/>
+                    {{review_info.review}}
+                    {% endif %}
+                </td>
+            </tr>
         </table>
-    <button type="submit">Submit</button>
-</form>
-        </div>
-<!--End table for creating a review-->        
-{% endifequal %}
+        <!--End table for viewing a review-->
+    </div>
+    {% endifequal %}
+    {% ifequal add_review 1 %}
+    <!--Table for creating a review-->
+    <div class="col-md-6">
+        <form action="" method="post">
+            {% csrf_token %}
+            <table class="d-lg-block review_table">
+                <tr>
+                    <th>
+                        Catagory
+                    </th>
+                    <td>
+                        Score (out of 10)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 1"
+                        "description" %}" data-html="true">
+                        {% get_obj "1" "category" %}
+                        </label>
+                    </th>
+                    <td>
+                        {{form.sound}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 2"
+                        "description" %}" data-html="true">
+                        {% get_obj "2" "category" %}
+                        </label>
+                    </th>
+
+                    <td>
+                        {{form.cinematography}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 3"
+                        "description" %}" data-html="true">
+                        {% get_obj "3" "category" %}
+                        </label>
+                    </th>
+
+                    <td>
+                        {{form.story_telling}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 4"
+                        "description" %}" data-html="true">
+                        {% get_obj "4" "category" %}
+                        </label>
+                    </th>
+
+                    <td>
+                        {{form.acting}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 5"
+                        "description" %}" data-html="true">
+                        {% get_obj "5" "category" %}
+                        </label>
+                    </th>
+                    <td>
+                        {{form.plausibility}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 6"
+                        "description" %}" data-html="true">
+                        {% get_obj "6" "category" %}
+                        </label>
+                    </th>
+                    <td>
+                        {{form.cast}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 7"
+                        "description" %}" data-html="true">
+                        {% get_obj "7" "category" %}
+                        </label>
+                    </th>
+                    <td>
+                        {{form.effects}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 8"
+                        "description" %}" data-html="true">
+                        {% get_obj "8" "category" %}
+                        </label>
+                    </th>
+                    <td>
+                        {{form.fun_factor}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 9"
+                        "description" %}" data-html="true">
+                        {% get_obj "9" "category" %}
+                        </label>
+                    </th>
+                    <td>
+                        {{form.originality}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="popover_header" data-container="body" data-toggle="popover"
+                               data-trigger="focus hover" data-placement="top" data-content="{% get_obj " 10"
+                        "description" %}" data-html="true">
+                        {% get_obj "10" "category" %}
+                        </label>
+                    </th>
+                    <td>
+                        {{form.characters}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Review
+                    </th>
+                    <td>
+                        {{form.review}}
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <!--End table for creating a review-->
+    {% endifequal %}
     <div class="col-md-5">
-{% ifequal movie_info.Poster "N/A" %}
-<img id="dogs" src="../../static/pictures/dogs.jpg" />
+        {% ifequal movie_info.Poster "N/A" %}
+        <img id="dogs" src="../../static/pictures/dogs.jpg"/>
         <p>It looks like we don't have a poster, so here is a picture of my dogs</p>
-{% else %}
-    <img src="{{movie_info.Poster}}" />
+        {% else %}
+        <img src="{{movie_info.Poster}}"/>
         {% endifequal %}
-    <h3>In case you forgot...</h3>
-     <p>
-       <b>Cast:</b> {{movie_info.Actors}}    
-    </p>
-    <p>
-        <b>Release Date:</b> {{movie_info.Released}}
-    </p>
-    <p>
-        <b>Director:</b> {{movie_info.Director}}
-    </p>
-    <p>
-        <b>Plot:</b> {{movie_info.Plot}}
-    </p>
+        <h3>In case you forgot...</h3>
+        <p>
+            <b>Cast:</b> {{movie_info.Actors}}
+        </p>
+        <p>
+            <b>Release Date:</b> {{movie_info.Released}}
+        </p>
+        <p>
+            <b>Director:</b> {{movie_info.Director}}
+        </p>
+        <p>
+            <b>Plot:</b> {{movie_info.Plot}}
+        </p>
+    </div>
+    <br/>
 </div>
-<br />
-</div>
-<br />
+<br/>
 {% if reviews %}
-<br />
+<br/>
 <div class="container other-reviews">
     <h4>Other reviews for {{review_info.title}}</h4>
     <table id="review_results_table">
@@ -287,31 +319,31 @@
             <th>User</th>
         </tr>
         {% for movie_review in reviews %}
-            <tr>
-                <td>
-                    <a href="{% url 'view_review' movie_score_id=movie_review.movie_score_id %}">
+        <tr>
+            <td>
+                <a href="{% url 'view_review' movie_score_id=movie_review.movie_score_id %}">
                     {{movie_review.title}}
-                    </a>
-                </td>
-                <td>
-                    {{movie_review.created_at|date}}
-                </td>
-                <td>
-                     {{movie_review.total}}
-                </td>   
-                <td>
-                    <a href="{% url 'movie' id=movie_review.user_id %}">
-                        {{movie_review.user}}
-                    </a>
-                </td> 
-            
-            </tr>
+                </a>
+            </td>
+            <td>
+                {{movie_review.created_at|date}}
+            </td>
+            <td>
+                {{movie_review.total}}
+            </td>
+            <td>
+                <a href="{% url 'movie' id=movie_review.user_id %}">
+                    {{movie_review.user}}
+                </a>
+            </td>
+
+        </tr>
         {% endfor %}
     </table>
-{% else %}
-    <br />
+    {% else %}
+    <br/>
     <h5>You will be the first person to review {{ movie_info.Title }}! Isn't that exciting?</h5>
-    </div>
+</div>
 {% endif %}
 
 {% endblock %}

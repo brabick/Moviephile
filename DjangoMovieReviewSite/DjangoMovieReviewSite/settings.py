@@ -13,10 +13,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import posixpath
 from .key import the_secret_key
+from .key import password
 import socket
 import django_heroku
-
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,10 +28,20 @@ SECRET_KEY = the_secret_key
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 # SECURITY WARNING: don't run with debug turned on in production!
 computer = socket.gethostname()
-if computer =="BrandonPC":
-    from .local_settings import *
+
+if computer == "Brandon" or computer == "BrandonPC":
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    DEBUG = True
+    ALLOWED_HOSTS = []
 else:
-    from .prod_settings import *
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_REFERRER_POLICY = 'origin'
+    DEBUG = False
+    ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -91,7 +100,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': 'C:\DjangoReviewSite\DjangoMovieReviewSite\DjangoMovieReviewSite\DjangoMovieReviewSite\my.cnf',
+            'database': 'movie_review_db',
+            'user': 'root',
+            'password': password,
+            'host': 'localhost'
             },
     }
 }
