@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import posixpath
-from .key import the_secret_key
-from .key import password
+from .key import the_secret_key, password, send_grid_api_key
 import socket
 import django_heroku
 
@@ -152,6 +151,11 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = send_grid_api_key
+EMAIL_USE_TLS = True
 
 django_heroku.settings(locals())

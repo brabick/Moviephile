@@ -6,18 +6,17 @@ from django.shortcuts import render, redirect
 from app import hidden_stuff
 from app.models import tbl_movie_scores, tbl_category_desc, tbl_user_last_search
 from django.http import HttpRequest, HttpResponse
-from django.template import RequestContext
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from app.forms import SignUpForm, tbl_movie_scores_form
 from django.contrib.auth import login, authenticate
-from django.db.models import Sum
 from django.contrib.auth.models import User
 import requests
-from django import template
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+
 
 
 # Home page!  Nothing interesting right now
@@ -76,8 +75,15 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            email = form.cleaned_data.get('email')
             user = authenticate(username=username, password=raw_password)
+            msg_plain = render_to_string('EmailTemplates/welcome.txt')
+            msg_html = render_to_string('EmailTemplates/welcome.html', {'username': username})
             login(request, user)
+            send_mail('Thanks for joining Moviephile!', msg_plain, 'info@moviephile.net', [email],
+                      fail_silently=False, html_message=msg_html)
+            send_mail('New User', username, 'info@moviephile.net', ['brabick@gmail.com'],
+                      fail_silently=False)
             return redirect('home')
     else:
         form = SignUpForm()
